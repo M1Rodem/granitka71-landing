@@ -1,0 +1,1 @@
+export type { GalleryItem } from './model/gallery.types';

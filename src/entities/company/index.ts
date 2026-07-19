@@ -1,0 +1,1 @@
+export type { CompanyInfo } from './model/company.types';

@@ -1,0 +1,1 @@
+export type { FAQItem } from './model/faq.types';

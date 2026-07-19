@@ -1,0 +1,6 @@
+:root {
+
+--section-padding:
+clamp(64px,8vw,120px);
+
+}
