@@ -1,75 +1,521 @@
-# React + TypeScript + Vite
+## О проекте
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Granitka71 Landing** — это маркетинговый сайт-визитка, предназначенный для презентации услуг компании и привлечения потенциальных клиентов.
 
-Currently, two official plugins are available:
+Основная задача проекта:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- быстро донести ценность услуг компании;
+- вызвать доверие у посетителя;
+- показать качество выполненных работ;
+- предоставить удобный способ связи;
+- конвертировать посетителя в заявку.
 
-## React Compiler
+Проект разработан как клиентская часть экосистемы:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Granitka71 CRM
 
-## Expanding the ESLint configuration
+В будущем Landing будет интегрирован с CRM Backend через API для управления динамическим контентом:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- услуги;
+- фотографии;
+- галерея работ;
+- отзывы;
+- FAQ;
+- контактная информация.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+При этом визуальная часть сайта, дизайн компонентов и пользовательский опыт остаются полностью управляемыми frontend-разработкой.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Технологии
+
+## Frontend
+
+- React 18+
+- TypeScript
+- Vite
+- React Router
+- React Query
+- CSS Modules
+- Framer Motion
+
+## Формы и валидация
+
+- React Hook Form
+- Zod
+
+## UI и визуальные решения
+
+Используемые источники вдохновения:
+
+- ReactBits
+- Aceternity UI
+- Magic UI
+
+Дополнительные инструменты:
+
+- Lucide Icons
+
+---
+
+## Архитектура системы
+
+Проект построен на основе архитектуры:
+
+**Feature-Sliced Design (FSD)**
+
+Основная структура:
+
+```
+
+src/
+
+├── app
+│ ├── providers
+│ ├── router
+│ ├── config
+│ └── styles
+│
+├── pages
+│
+├── widgets
+│
+├── features
+│
+├── entities
+│
+└── shared
 
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Слои архитектуры
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### App
+
+Отвечает за:
+
+- инициализацию приложения;
+- глобальные провайдеры;
+- маршрутизацию;
+- глобальные настройки.
+
+---
+
+### Pages
+
+Содержит страницы приложения.
+
+Пример:
 
 ```
+
+pages/home
+
+```
+
+Страницы отвечают только за сборку крупных частей интерфейса.
+
+---
+
+### Widgets
+
+Самостоятельные крупные блоки интерфейса:
+
+Пример:
+
+- Header
+- Hero
+- Services
+- Gallery
+- Reviews
+- Footer
+
+---
+
+### Features
+
+Пользовательские сценарии:
+
+Пример:
+
+- отправка заявки;
+- обратная связь;
+- взаимодействие с формами.
+
+---
+
+### Entities
+
+Бизнес-сущности проекта:
+
+Пример:
+
+```
+
+service
+gallery
+review
+faq
+contact
+media
+company
+
+```
+
+Содержат только модели данных и бизнес-структуры.
+
+---
+
+### Shared
+
+Общие элементы проекта:
+
+```
+
+shared/
+
+├── ui
+├── theme
+├── api
+├── repository
+├── mocks
+├── motion
+├── assets
+├── hooks
+├── utils
+└── types
+
+```
+
+---
+
+## Архитектура данных
+
+На текущем этапе используются Mock данные.
+
+Поток данных:
+
+```
+
+Mock Data
+
+↓
+
+Repository Layer
+
+↓
+
+Entities
+
+↓
+
+Widgets
+
+↓
+
+UI
+
+```
+
+---
+
+После интеграции CRM:
+
+```
+
+ASP.NET Core Backend
+
+↓
+
+API Repository
+
+↓
+
+Entities
+
+↓
+
+Widgets
+
+↓
+
+UI
+
+```
+
+Компоненты интерфейса не зависят от источника данных.
+
+---
+
+## Интеграция с Granitka71 CRM
+
+Landing не является CMS.
+
+CRM управляет только изменяемыми данными:
+
+## Услуги
+
+Администратор может:
+
+- добавить услугу;
+- изменить описание;
+- заменить изображение;
+- изменить порядок;
+- скрыть услугу.
+
+## Галерея
+
+Управление:
+
+- загрузка изображений;
+- удаление;
+- описание;
+- сортировка.
+
+## Отзывы
+
+Управление:
+
+- создание;
+- редактирование;
+- скрытие;
+- удаление.
+
+## Контакты
+
+Управление:
+
+- телефон;
+- адрес;
+- график работы;
+- ссылки;
+- координаты карты.
+
+Дизайн, структура и логика компонентов остаются частью Landing.
+
+---
+
+## Роли пользователей
+
+В рамках Landing существует одна пользовательская роль:
+
+## Посетитель сайта
+
+Основная задача пользователя:
+
+- ознакомиться с услугами;
+- изучить преимущества компании;
+- посмотреть выполненные работы;
+- получить ответы на вопросы;
+- оставить заявку.
+
+Административное управление осуществляется через:
+
+- Granitka71 CRM
+
+---
+
+## Основные функции
+
+Главная задача Landing — предоставить максимум полезной информации за минимальное время нахождения пользователя на странице.
+
+Основные функции:
+
+- презентация компании;
+- демонстрация услуг;
+- отображение выполненных работ;
+- отзывы клиентов;
+- ответы на частые вопросы;
+- контактная информация;
+- форма обратной связи;
+- интеграция с картой;
+- отправка заявок.
+
+---
+
+## UI/UX система
+
+Проект использует собственную Design System.
+
+Основные принципы:
+
+- премиальный внешний вид;
+- минимализм;
+- высокая читаемость;
+- доверительный визуальный стиль;
+- плавные анимации;
+- адаптивность.
+
+## Design Tokens
+
+Используются:
+
+- цветовые переменные;
+- типографика;
+- spacing система;
+- радиусы;
+- тени;
+- motion tokens.
+
+## UI правила
+
+Все компоненты:
+
+- используют CSS Modules;
+- используют Design Tokens;
+- имеют адаптивное поведение;
+- поддерживают accessibility;
+- не содержат дублирования.
+
+## Анимации
+
+Используется:
+
+- Framer Motion;
+- ReactBits подходы;
+- кастомные motion presets.
+
+Анимации используются только для улучшения UX и не должны мешать восприятию информации.
+
+---
+
+## Accessibility
+
+Проект учитывает:
+
+- семантическую HTML-разметку;
+- управление клавиатурой;
+- focus состояния;
+- ARIA атрибуты;
+- контрастность элементов.
+
+---
+
+## SEO
+
+Проект подготовлен для поискового продвижения.
+
+Используются:
+
+- семантическая структура страниц;
+- корректные заголовки H1-H3;
+- Meta данные;
+- Open Graph;
+- Schema.org разметка;
+- Local Business данные;
+- оптимизированные изображения;
+- sitemap.xml;
+- robots.txt.
+
+Цель:
+
+максимальная видимость в поисковых системах по локальным запросам:
+
+- памятники Тула;
+- изготовление памятников;
+- благоустройство мест захоронения.
+
+---
+
+## Производительность
+
+Проект оптимизирован под:
+
+- быструю загрузку;
+- минимальный JavaScript bundle;
+- lazy loading;
+- code splitting;
+- оптимизацию изображений;
+- предотвращение лишних рендеров.
+
+---
+
+## Развертывание и инфраструктура
+
+## Development
+
+Запуск проекта:
+
+```bash
+npm install
+
+npm run dev
+```
+
+## Production build
+
+Сборка:
+
+```bash
+npm run build
+```
+
+Проверка качества:
+
+```bash
+npm run lint
+```
+
+---
+
+## Переменные окружения
+
+Пример:
+
+```
+.env.example
+```
+
+Используемые переменные:
+
+```
+VITE_API_URL=
+```
+
+---
+
+## План развития
+
+## Этап 1
+
+Фундамент проекта:
+
+- архитектура;
+
+- Design System;
+
+- UI Kit;
+
+- базовые страницы.
+
+## Этап 2
+
+Разработка Landing:
+
+- Header;
+
+- Hero;
+
+- Services;
+
+- Gallery;
+
+- Reviews;
+
+- FAQ;
+
+- Contacts.
+
+## Этап 3
+
+Интеграция с CRM:
+
+- API подключение;
+
+- динамический контент;
+
+- управление через административную панель.
+
+---
