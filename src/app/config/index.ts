@@ -1,1 +1,1 @@
-export const APP_NAME = 'Granitka71'
+export { APP_NAME, APP_URL } from '@/shared/constants'

@@ -1,33 +1,85 @@
 :root {
-
   /* Container */
-  --container-width: 1280px;
-
+  --container-width-sm: 48rem;
+  --container-width-md: 64rem;
+  --container-width-lg: 80rem;
+  --container-padding-x-min: var(--space-4);
+  --container-padding-x-fluid: 4vw;
+  --container-padding-x-max: var(--space-6);
+  --container-padding-x: clamp(
+    var(--container-padding-x-min),
+    var(--container-padding-x-fluid),
+    var(--container-padding-x-max)
+  );
 
   /* Spacing */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
 
+  /* Breakpoints */
+  --breakpoint-sm: 48rem;
+  --breakpoint-md: 64rem;
+  --breakpoint-lg: 80rem;
+
+  /* Borders */
+  --border-width-thin: 0.0625rem;
+  --border-width-thick: 0.125rem;
 
   /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-round: 9999px;
 
+  /* Opacity */
+  --opacity-none: 0;
+  --opacity-muted: 0.64;
+  --opacity-overlay: 0.8;
+  --opacity-disabled: 0.5;
+  --opacity-loading: 0.72;
+
+  /* Focus */
+  --focus-ring-width: var(--border-width-thick);
+  --focus-ring-offset: var(--space-1);
+
+  /* Z-index */
+  --z-index-base: 0;
+  --z-index-raised: 10;
+  --z-index-overlay: 20;
+  --z-index-sticky: 30;
+  --z-index-modal: 40;
+  --z-index-toast: 50;
+
+  /* Motion duration */
+  --motion-duration-instant: 0ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 240ms;
+  --motion-duration-slow: 360ms;
+
+  /* Motion easing */
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-decelerate: cubic-bezier(0, 0, 0, 1);
+  --motion-ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+
+  /* Motion distance */
+  --motion-offset-sm: var(--space-2);
+  --motion-offset-md: var(--space-4);
+  --motion-offset-lg: var(--space-6);
 
   /* Transition */
-  --transition-fast: 150ms;
-  --transition-normal: 300ms;
-  --transition-slow: 500ms;
+  --transition-fast: var(--motion-duration-fast) var(--motion-ease-standard);
+  --transition-normal: var(--motion-duration-normal) var(--motion-ease-standard);
+  --transition-slow: var(--motion-duration-slow) var(--motion-ease-emphasized);
 }

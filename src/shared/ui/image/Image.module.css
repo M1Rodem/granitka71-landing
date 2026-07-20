@@ -1,0 +1,29 @@
+.image {
+  width: 100%;
+  height: auto;
+  background-color: var(--color-surface-muted);
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
+.fit-contain {
+  object-fit: contain;
+}
+
+.radius-none {
+  border-radius: 0;
+}
+
+.radius-sm {
+  border-radius: var(--radius-sm);
+}
+
+.radius-md {
+  border-radius: var(--radius-md);
+}
+
+.radius-lg {
+  border-radius: var(--radius-lg);
+}

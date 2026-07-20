@@ -1,4 +1,4 @@
-@import "@/shared/theme/index.css";
+@import '@/shared/theme/index.css';
 
 *,
 *::before,
@@ -12,7 +12,12 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 20rem;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: var(--line-height-normal);
+  text-rendering: optimizeLegibility;
 }
 
 img,
@@ -23,6 +28,31 @@ svg {
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-accent);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--shadow-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--motion-duration-instant) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--motion-duration-instant) !important;
+  }
 }

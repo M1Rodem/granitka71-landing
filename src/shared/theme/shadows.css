@@ -1,10 +1,7 @@
 :root {
-
-  --shadow-card:
-    0 10px 30px rgba(0,0,0,0.08);
-
-
-  --shadow-modal:
-    0 20px 60px rgba(0,0,0,0.15);
-
+  --shadow-card: 0 0.625rem 1.875rem rgb(0 0 0 / 0.08);
+  --shadow-card-hover: 0 1.125rem 2.75rem rgb(0 0 0 / 0.12);
+  --shadow-glass: 0 0.75rem 2rem rgb(0 0 0 / 0.1);
+  --shadow-focus: 0 0 0 0.25rem var(--color-focus-ring);
+  --shadow-modal: 0 1.25rem 3.75rem rgb(0 0 0 / 0.15);
 }

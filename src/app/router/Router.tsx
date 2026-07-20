@@ -1,12 +1,10 @@
-import {
-  useRoutes,
-} from 'react-router-dom'
+import { Suspense } from 'react'
+import { useRoutes } from 'react-router-dom'
 
-import {
-  routes,
-} from './routes'
-
+import { routes } from './routes'
 
 export function Router() {
-  return useRoutes(routes)
+  const element = useRoutes(routes)
+
+  return <Suspense fallback={null}>{element}</Suspense>
 }

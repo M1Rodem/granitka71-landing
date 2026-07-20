@@ -1,11 +1,10 @@
 import type { RouteObject } from 'react-router-dom'
 
-import { HomePage } from '@/pages/home'
-
+import { LandingRoute } from './RouteComponents'
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <HomePage />,
+    element: <LandingRoute />,
   },
 ]

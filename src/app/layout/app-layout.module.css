@@ -1,0 +1,10 @@
+.layout {
+  min-block-size: 100vh;
+  background-color: var(--color-background);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

@@ -1,0 +1,22 @@
+.section {
+  width: 100%;
+  padding-block: var(--section-padding);
+  background-color: var(--section-background-color);
+}
+
+.tone-transparent {
+  --section-background-color: transparent;
+}
+
+.tone-background {
+  --section-background-color: var(--color-background);
+}
+
+.tone-surface {
+  --section-background-color: var(--color-surface);
+}
+
+.tone-primary {
+  --section-background-color: var(--color-primary);
+  color: var(--color-surface);
+}
