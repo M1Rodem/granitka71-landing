@@ -1,0 +1,73 @@
+.visual {
+  grid-area: visual;
+  position: relative;
+  isolation: isolate;
+}
+
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 10%;
+  z-index: -1;
+  background: var(--color-accent);
+  opacity: var(--opacity-accent-soft);
+  filter: blur(var(--blur-xl));
+  border-radius: var(--radius-round);
+}
+
+.visualSurface {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-3);
+}
+
+@media (max-width: 64rem) {
+  .visual {
+    position: absolute;
+    inset: 0;
+    height: 85vh;
+    z-index: 1;
+  }
+
+  .visualSurface {
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.72;
+    filter: brightness(0.92) saturate(1.1) contrast(1.05);
+  }
+
+  .visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-background) 0%,
+        transparent 25%,
+        transparent 75%,
+        var(--color-background) 100%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-background) 0%,
+        rgb(247 245 241 / 0.35) 25%,
+        rgb(247 245 241 / 0.35) 75%,
+        var(--color-background) 100%
+      );
+    pointer-events: none;
+  }
+
+  .visual::before {
+    display: none;
+  }
+}

@@ -1,6 +1,6 @@
 import { Seo } from '@/shared/lib'
 import { LandingSection } from '@/widgets/landing-section'
-
+import { Hero } from '@/widgets/hero'
 import styles from './landing-page.module.css'
 
 const landingSections = [
@@ -59,21 +59,25 @@ export function LandingPage() {
     <>
       <Seo
         canonical="/"
-        description="Landing shell Granitka71 с полноценным layout, навигацией, header/footer и placeholder-структурой под будущие бизнес-секции."
-        title="Granitka71 — Landing Shell"
+        description="Landing shell Granitka71(Гранитка71) с полноценным layout, навигацией, header/footer и placeholder-структурой под будущие бизнес-секции."
+        title="Granitka71(Гранитка71) — Landing Shell"
       />
 
       <div className={styles.page}>
-        {landingSections.map((section) => (
-          <LandingSection
-            description={section.description}
-            id={section.id}
-            key={section.id}
-            title={section.title}
-            tone={section.tone}
-            variant={section.variant}
-          />
-        ))}
+        <Hero />
+
+        {landingSections
+          .filter((section) => section.id !== 'hero')
+          .map((section) => (
+            <LandingSection
+              description={section.description}
+              id={section.id}
+              key={section.id}
+              title={section.title}
+              tone={section.tone}
+              variant={section.variant}
+            />
+          ))}
       </div>
     </>
   )

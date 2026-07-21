@@ -3,7 +3,7 @@ import { APP_NAME, APP_URL } from './app'
 export const SEO_DEFAULTS = {
   title: APP_NAME,
   description:
-    'Коммерческий сайт Granitka71 с каталогом услуг, визуальной галереей и подготовкой к интеграции с CRM.',
+    'Коммерческий сайт Гранитка71 с каталогом услуг, визуальной галереей и подготовкой к интеграции с CRM.',
   locale: 'ru_RU',
   type: 'website',
   siteName: APP_NAME,
