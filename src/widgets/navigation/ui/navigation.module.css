@@ -1,10 +1,10 @@
 .navigation {
   display: flex;
+  position: relative;
 }
 
 .wrapper {
   position: relative;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,102 +13,143 @@
 .list {
   position: relative;
   z-index: 2;
-
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-
+  gap: var(--space-1);
   margin: 0;
-  padding: 0;
-
+  padding: 4px;
   list-style: none;
 }
 
 .item {
   position: relative;
-  z-index: 2;
-
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-shrink: 0;
 }
 
 .link {
   position: relative;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   min-height: 42px;
-
-  padding: 10px 18px;
-
+  padding: 10px 20px;
   border-radius: 999px;
-
   color: var(--color-text-primary);
-
   text-decoration: none;
-
-  transition:
-    color 0.25s ease,
-    transform 0.25s ease;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  font-size: var(--text-sm);
+  transition: color 0.3s ease;
+  z-index: 2;
+  isolation: isolate;
 }
 
 .link:hover {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
-.link[aria-current='page'] {
-  color: var(--color-accent);
+.linkActive {
+  color: var(--color-text-primary);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .label {
   position: relative;
   z-index: 4;
-
-  transition: color 0.25s ease;
+  transition: color 0.3s ease;
 }
 
-.labelActive {
-  color: var(--color-accent);
-}
-
-/* -------------------------- */
-/* Hover Capsule              */
-/* -------------------------- */
-
-.hoverPill {
+.glassPill {
   position: absolute;
-
-  top: 0;
-  left: 0;
-
   z-index: 1;
-
   border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.055);
-
-  border: 1px solid rgba(255, 255, 255, 0.09);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 8px 24px rgba(0, 0, 0, 0.18);
-
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   pointer-events: none;
-
-  will-change: transform, width, height, opacity;
+  overflow: hidden;
+  transition:
+    left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
 }
 
-/* -------------------------- */
-/* Vertical                   */
-/* -------------------------- */
+.glassPill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    rgba(255, 255, 255, 0.05) 70%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.glassPill::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.liquidGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.03) 35%,
+    rgba(255, 255, 255, 0.01) 60%,
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+  transition: transform 0.05s linear;
+}
+
+.liquidShine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+  mix-blend-mode: soft-light;
+  transition: transform 0.08s linear;
+}
 
 .orientation-vertical .wrapper {
   width: 100%;
@@ -116,11 +157,10 @@
 
 .orientation-vertical .list {
   width: 100%;
-
   flex-direction: column;
   align-items: stretch;
-
-  gap: var(--space-3);
+  gap: var(--space-1);
+  padding: 4px;
 }
 
 .orientation-vertical .item {
@@ -129,16 +169,30 @@
 
 .orientation-vertical .link {
   justify-content: flex-start;
-
   width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: var(--radius-lg);
 }
 
-/* -------------------------- */
-/* Responsive                 */
-/* -------------------------- */
+.orientation-vertical .glassPill {
+  border-radius: var(--radius-lg);
+}
 
 @media (max-width: 64rem) {
   .orientation-horizontal .list {
     gap: var(--space-1);
+  }
+}
+
+@media (max-width: 64rem) {
+  .glassPill {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glassPill {
+    transition: none !important;
   }
 }

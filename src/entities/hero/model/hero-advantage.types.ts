@@ -1,5 +1,8 @@
-export interface HeroAdvantage{
-    value: string
-    label: string
-    description: string
+export type AdvantageType = 'experience' | 'projects' | 'quality'
+
+export interface HeroAdvantage {
+  type: AdvantageType
+  value: string
+  label: string
+  description: string
 }

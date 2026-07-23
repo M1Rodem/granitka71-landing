@@ -15,11 +15,11 @@ interface HeroAdvantagesProps {
   advantages: HeroAdvantage[]
 }
 
-const advantageIcons = [
-  Award,
-  Gem,
-  ShieldCheck,
-]
+const advantageIcons = {
+  experience: Award,
+  projects: Gem,
+  quality: ShieldCheck,
+}
 
 export function HeroAdvantages({
   advantages,
@@ -31,12 +31,12 @@ export function HeroAdvantages({
       initial="initial"
       variants={staggerVariants}
     >
-      {advantages.map((advantage, index) => {
-        const Icon = advantageIcons[index]
+      {advantages.map((advantage) => {
+        const Icon = advantageIcons[advantage.type]
 
         return (
           <motion.div
-            key={advantage.label}
+            key={advantage.type}
             variants={slideUpVariants}
           >
             <Card className={styles.card}>

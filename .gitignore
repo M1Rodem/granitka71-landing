@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Image cache
+.image-cache.json
+
+# Generated images
+public/images/generated/
+src/shared/lib/image/generated/
+
+# Generated files
+.generated/
+public/images/generated/
+.image-cache.json

@@ -2,31 +2,17 @@ import { motion } from 'framer-motion'
 
 import { scaleInVariants } from '@/shared/motion'
 import { Surface, Image } from '@/shared/ui'
+import { getImage } from '@/shared/lib/image/ImageRegistry'
 
-import styles from './HeroVisual.module.css'
+import styles from './herovisual.module.css'
 
-interface HeroVisualProps {
-  image: string
-}
+export function HeroVisual() {
+  const heroImage = getImage('hero')
 
-export function HeroVisual({
-  image,
-}: HeroVisualProps) {
   return (
-    <motion.div
-      className={styles.visual}
-      variants={scaleInVariants}
-    >
-      <Surface
-        className={styles.visualSurface}
-      >
-        <Image
-          src={image}
-          alt="Изготовление памятников Гранитка71"
-          width={800}
-          height={900}
-          loading="eager"
-        />
+    <motion.div className={styles.visual} variants={scaleInVariants}>
+      <Surface className={styles.visualSurface}>
+        <Image image={heroImage} radius="lg" fit="cover" />
       </Surface>
     </motion.div>
   )

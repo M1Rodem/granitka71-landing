@@ -1,1 +1,2 @@
-export { useHero } from './useHero'
+export * from './useHero'
+export * from './useCompany'

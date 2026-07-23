@@ -1,11 +1,7 @@
-import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
-
-import type { NavigationItem as NavigationItemModel } from '@/shared/config/navigation'
 import { createClassName } from '@/shared/utils'
-
+import { useNavigationPill } from '../hooks/useNavigationPill'
 import { NavigationItem } from './NavigationItem'
-
+import type { NavigationItem as NavigationItemModel } from '@/shared/config/navigation'
 import styles from './navigation.module.css'
 
 type NavigationOrientation = 'horizontal' | 'vertical'
@@ -17,6 +13,8 @@ interface NavigationProps {
   items: NavigationItemModel[]
   onNavigate?: () => void
   orientation?: NavigationOrientation
+  onHoverChange?: (id: string | null) => void
+  hoveredId?: string | null
 }
 
 export function Navigation({
@@ -26,43 +24,23 @@ export function Navigation({
   items,
   onNavigate,
   orientation = 'horizontal',
+  onHoverChange,
+  hoveredId = null,
 }: NavigationProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null)
+  const {
+    listRef,
+    pillRef,
+    glowRef,
+    shineRef,
+    pillStyle,
+    activeId,
+    activeHover,
+    handleHover,
+    handleLeave,
+    handleMouseMove,
+    setItemRef,
+  } = useNavigationPill({ items, currentHref, onHoverChange, hoveredId })
 
-  const itemRefs = useRef<Record<string, HTMLLIElement | null>>({})
-
-  const [hoverStyle, setHoverStyle] = useState({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    visible: false,
-  })
-
-  const updateHover = (id: string) => {
-    const wrapper = wrapperRef.current
-    const item = itemRefs.current[id]
-
-    if (!wrapper || !item) return
-
-    const wrapperRect = wrapper.getBoundingClientRect()
-    const itemRect = item.getBoundingClientRect()
-
-    setHoverStyle({
-      x: itemRect.left - wrapperRect.left,
-      y: itemRect.top - wrapperRect.top,
-      width: itemRect.width,
-      height: itemRect.height,
-      visible: true,
-    })
-  }
-
-  const hideHover = () => {
-    setHoverStyle((prev) => ({
-      ...prev,
-      visible: false,
-    }))
-  }
   return (
     <nav
       aria-label={ariaLabel}
@@ -73,41 +51,32 @@ export function Navigation({
       )}
     >
       <div
-        ref={wrapperRef}
         className={styles.wrapper}
-        onMouseLeave={hideHover}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleLeave}
       >
-        <motion.div
-          className={styles.hoverPill}
-          animate={{
-            x: hoverStyle.x,
-            y: hoverStyle.y,
-            width: hoverStyle.width,
-            height: hoverStyle.height,
-            opacity: hoverStyle.visible ? 1 : 0,
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 550,
-            damping: 36,
-            mass: 0.55,
-          }}
-        />
-
-        <ul className={styles.list}>
+        <ul ref={listRef} className={styles.list}>
           {items.map((item) => (
             <NavigationItem
               key={item.id}
-              ref={(el: HTMLLIElement | null) => {
-                itemRefs.current[item.id] = el
-              }}
               item={item}
-              currentHref={currentHref}
+              isActive={activeId === item.id}
+              isHovered={activeHover === item.id}
               onNavigate={onNavigate}
-              onHover={() => updateHover(item.id)}
+              onHover={() => handleHover(item.id)}
+              ref={setItemRef(item.id)}
             />
           ))}
         </ul>
+
+        <div
+          ref={pillRef}
+          className={styles.glassPill}
+          style={pillStyle}
+        >
+          <div ref={glowRef} className={styles.liquidGlow} />
+          <div ref={shineRef} className={styles.liquidShine} />
+        </div>
       </div>
     </nav>
   )

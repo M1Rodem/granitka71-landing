@@ -1,54 +1,64 @@
-import type { CSSProperties, ImgHTMLAttributes } from 'react'
-
+import { forwardRef } from 'react'
+import { buildSrcSet } from '@/shared/lib/image'
+import type { ImageComponentProps } from '@/shared/lib/image/types'
 import styles from './Image.module.css'
 
-type ImageFit = 'cover' | 'contain'
-type ImageRadius = 'none' | 'sm' | 'md' | 'lg'
+export type ImageProps = ImageComponentProps
 
-export interface ImageProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'alt'> {
-  alt: string
-  aspectRatio?: string
-  fit?: ImageFit
-  height: number
-  radius?: ImageRadius
-  width: number
-}
+export const Image = forwardRef<HTMLImageElement, ImageProps>(
+  function Image(
+    {
+      image,
+      className,
+      fit = 'cover',
+      radius = 'none',
+      ...props
+    },
+    ref
+  ) {
+    const { formats, alt, width, height, aspectRatio, sizes, loading, fetchPriority } = image
 
-export function Image({
-  alt,
-  aspectRatio,
-  className,
-  fit = 'cover',
-  height,
-  loading = 'lazy',
-  radius = 'md',
-  width,
-  ...props
-}: ImageProps) {
-  const classes = [
-    styles.image,
-    styles[`fit-${fit}`],
-    styles[`radius-${radius}`],
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ')
+    const classes = [
+      styles.image,
+      styles[`fit-${fit}`],
+      radius !== 'none' && styles[`radius-${radius}`],
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ')
 
-  const style = {
-    aspectRatio: aspectRatio ?? `${width} / ${height}`,
-  } satisfies CSSProperties
+    return (
+      <picture>
+        <source
+          type="image/avif"
+          srcSet={buildSrcSet(formats.avif)}
+          sizes={sizes || '100vw'}
+        />
+        <source
+          type="image/webp"
+          srcSet={buildSrcSet(formats.webp)}
+          sizes={sizes || '100vw'}
+        />
+        <source
+          srcSet={buildSrcSet(formats.fallback)}
+          sizes={sizes || '100vw'}
+        />
 
-  return (
-    <img
-      alt={alt}
-      className={classes}
-      decoding="async"
-      height={height}
-      loading={loading}
-      style={style}
-      width={width}
-      {...props}
-    />
-  )
-}
+        <img
+          ref={ref}
+          src={formats.fallback[0]?.src || ''}
+          alt={alt}
+          className={classes}
+          style={{ aspectRatio }}
+          width={width}
+          height={height}
+          loading={loading || 'lazy'}
+          fetchPriority={fetchPriority || 'auto'}
+          {...props}
+        />
+      </picture>
+    )
+  }
+)
+
+Image.displayName = 'Image'

@@ -1,280 +1,208 @@
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  type Variants,
-} from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { APP_NAME } from '@/shared/constants'
-import {
-  motionTransitions,
-  scaleInVariants,
-  slideUpVariants,
-} from '@/shared/motion'
-import { Button, Container, Surface } from '@/shared/ui'
+import logo from '@/shared/assets/images/logo/logo.png'
+import { Container, Surface } from '@/shared/ui'
 import { createClassName } from '@/shared/utils'
-import { Navigation } from '@/widgets/navigation'
 
+import {
+  useBodyScrollLock,
+  useCurrentHash,
+  useEscapeClose,
+  useHeaderScroll,
+} from '../hooks'
 import {
   headerCtaLabel,
   headerNavigationItems,
   headerPhoneHref,
 } from '../model/navigation'
+
+import { HeaderDesktop } from './HeaderDesktop'
+import { HeaderMobile } from './HeaderMobile'
+import { HeaderOverlay } from './HeaderOverlay'
+import { MobileMenu } from './MobileMenu'
+
 import styles from './header.module.css'
 
-const overlayVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: motionTransitions.default,
-  },
-  exit: {
-    opacity: 0,
-    transition: motionTransitions.quick,
-  },
-}
-
-const mobileMenuVariants: Variants = {
-  initial: {
-    opacity: 0,
-    scaleY: 0.9,
-    y: -16,
-    filter: 'blur(10px)',
-    transformOrigin: 'top center',
-  },
-
-  animate: {
-    opacity: 1,
-    scaleY: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transformOrigin: 'top center',
-    transition: motionTransitions.emphasis,
-  },
-
-  exit: {
-    opacity: 0,
-    scaleY: 0.9,
-    y: -12,
-    filter: 'blur(8px)',
-    transition: motionTransitions.quick,
-  },
-}
-
-function getCurrentHash() {
-  if (typeof window === 'undefined') {
-    return ''
-  }
-  return window.location.hash
-}
-
 export function Header() {
-  const prefersReducedMotion = useReducedMotion()
-  const headerRef = useRef<HTMLElement>(null)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [currentHash, setCurrentHash] = useState(getCurrentHash)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const [hoveredNavId, setHoveredNavId] = useState<string | null>(null)
+  const headerRef = useRef<HTMLElement>(null)
+  const logoRef = useRef<HTMLAnchorElement>(null)
+  const logoRafRef = useRef<number>(0)
 
-  // Обновляем высоту хедера
-  const updateHeaderHeight = () => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight)
-    }
-  }
+  const isScrolled = useHeaderScroll()
+  const currentHash = useCurrentHash()
+  const prefersReducedMotion = useReducedMotion()
+
+  useBodyScrollLock(isMenuOpen)
+  useEscapeClose(isMenuOpen, () => setIsMenuOpen(false))
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-
-    const handleHashChange = () => {
-      setCurrentHash(window.location.hash)
-    }
-
-    // Определяем высоту хедера
-    updateHeaderHeight()
-
-    handleScroll()
-    handleHashChange()
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('hashchange', handleHashChange)
-    window.addEventListener('resize', updateHeaderHeight)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('hashchange', handleHashChange)
-      window.removeEventListener('resize', updateHeaderHeight)
-    }
-  }, [])
-
-  // Блокировка скролла при открытом меню
-  useEffect(() => {
-    if (!isMenuOpen) {
-      return undefined
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMenuOpen(false)
+    const updateHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.getBoundingClientRect().height)
       }
     }
 
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', handleEscape)
+    updateHeight()
 
-    // Обновляем высоту хедера при открытии меню (на случай если изменилась)
-    updateHeaderHeight()
-
-    return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', handleEscape)
+    const observer = new ResizeObserver(updateHeight)
+    if (headerRef.current) {
+      observer.observe(headerRef.current)
     }
-  }, [isMenuOpen])
 
-  const handleNavigate = () => {
-    setCurrentHash(window.location.hash)
+    return () => observer.disconnect()
+  }, [])
+
+  const handleLogoMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (prefersReducedMotion) return
+
+    const el = logoRef.current
+    if (!el) return
+
+    const rect = el.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+
+    const deltaX = (e.clientX - centerX) * 0.35
+    const deltaY = (e.clientY - centerY) * 0.35
+
+    cancelAnimationFrame(logoRafRef.current)
+    logoRafRef.current = requestAnimationFrame(() => {
+      el.style.transform = `translate(${deltaX}px, ${deltaY}px)`
+    })
+  }, [prefersReducedMotion])
+
+  const handleLogoMouseLeave = useCallback(() => {
+    const el = logoRef.current
+    if (!el) return
+
+    cancelAnimationFrame(logoRafRef.current)
+    el.style.transform = 'translate(0, 0)'
+  }, [])
+
+  useEffect(() => {
+    return () => cancelAnimationFrame(logoRafRef.current)
+  }, [])
+
+  const handleToggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev)
+  }, [])
+
+  const handleCloseMenu = useCallback(() => {
     setIsMenuOpen(false)
-  }
+  }, [])
 
-  const handleCall = () => {
+  const handleNavigate = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [])
+
+  const handleCall = useCallback(() => {
     window.location.href = headerPhoneHref
-  }
+  }, [])
 
-  const toggleMenu = () => {
-    setIsMenuOpen((current) => !current)
-    // Обновляем высоту после открытия/закрытия
-    setTimeout(updateHeaderHeight, 100)
-  }
+  const handleNavHover = useCallback((id: string | null) => {
+    setHoveredNavId(id)
+  }, [])
+
+  const effectiveHash = currentHash || '#hero'
 
   return (
     <>
-      <header ref={headerRef} className={styles.header}>
+      <header
+        ref={headerRef}
+        className={createClassName(
+          styles.header,
+          isMenuOpen && styles.menuOpen,
+        )}
+      >
         <Container>
           <motion.div
             animate="animate"
             className={styles.motionFrame}
             initial="initial"
-            variants={prefersReducedMotion ? scaleInVariants : slideUpVariants}
+            variants={
+              prefersReducedMotion
+                ? { initial: { opacity: 1 }, animate: { opacity: 1 } }
+                : {
+                    initial: { opacity: 0, y: 24 },
+                    animate: { opacity: 1, y: 0 },
+                  }
+            }
+            transition={{
+              type: 'spring',
+              stiffness: 500,
+              damping: 40,
+              mass: 0.8,
+            }}
           >
             <Surface
               className={createClassName(
                 styles.shell,
                 isScrolled ? styles.shellScrolled : styles.shellTop,
+                isMenuOpen && styles.shellExpanded,
               )}
               padding="sm"
               tone={isScrolled ? 'default' : 'glass'}
             >
               <div className={styles.row}>
-                <a className={styles.logo} href="/">
-                  <span className={styles.logoMark}>{APP_NAME}</span>
-                  <span className={styles.logoCaption}>Landing Shell</span>
+                <a
+                  ref={logoRef}
+                  className={styles.logoWrapper}
+                  href="#hero"
+                  aria-label="Гранитка71 — На главную"
+                  onMouseMove={handleLogoMouseMove}
+                  onMouseLeave={handleLogoMouseLeave}
+                >
+                  <div className={styles.logoGlow} />
+                  <div className={styles.logoPulse} />
+                  <div className={styles.logoInner}>
+                    <img
+                      src={logo}
+                      alt="Гранитка71"
+                      className={styles.logoImage}
+                      draggable={false}
+                    />
+                  </div>
+                  <div className={styles.logoShine} />
                 </a>
 
-                <div className={styles.desktopNavigation}>
-                  <Navigation
-                    currentHref={currentHash}
-                    items={headerNavigationItems}
-                  />
-                </div>
+                <HeaderDesktop
+                  items={headerNavigationItems}
+                  currentHash={effectiveHash}
+                  ctaLabel={headerCtaLabel}
+                  onCtaClick={handleCall}
+                  onNavigate={handleNavigate}
+                  onNavHover={handleNavHover}
+                  hoveredNavId={hoveredNavId}
+                />
 
-                <div className={styles.desktopActions}>
-                  <Button onClick={handleCall} size="sm" variant="primary">
-                    {headerCtaLabel}
-                  </Button>
-                </div>
-
-                <button
-                  aria-controls="mobile-navigation"
-                  aria-expanded={isMenuOpen}
-                  aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
-                  className={styles.burger}
-                  onClick={toggleMenu}
-                  type="button"
-                >
-                  <span className={styles.burgerLine} />
-                  <span className={styles.burgerLine} />
-                  <span className={styles.burgerLine} />
-                </button>
+                <HeaderMobile
+                  isMenuOpen={isMenuOpen}
+                  onToggleMenu={handleToggleMenu}
+                />
               </div>
             </Surface>
           </motion.div>
         </Container>
       </header>
 
-      {/* Мобильное меню вне хедера */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            className={styles.mobileLayer}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={overlayVariants}
-            style={{
-              // Динамический отступ сверху, чтобы меню не перекрывало хедер
-              paddingTop: `calc(${headerHeight}px + 16px)`,
-            }}
-          >
-            {/* Оверлей */}
-            <button
-              type="button"
-              className={styles.overlay}
-              aria-label="Закрыть мобильное меню"
-              onClick={() => setIsMenuOpen(false)}
+          <>
+            <HeaderOverlay onClose={handleCloseMenu} />
+            <MobileMenu
+              items={headerNavigationItems}
+              currentHash={effectiveHash}
+              ctaLabel={headerCtaLabel}
+              onCtaClick={handleCall}
+              onNavigate={handleNavigate}
+              onClose={handleCloseMenu}
+              headerHeight={headerHeight}
             />
-
-            {/* Контейнер меню */}
-            <motion.div
-              className={styles.mobileMenuWrap}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={mobileMenuVariants}
-            >
-              <Surface
-                as="aside"
-                className={styles.mobileMenu}
-                padding="md"
-                tone="glass"
-              >
-                {/* Заголовок меню */}
-                <div className={styles.mobileMenuHeader}>
-                  <span className={styles.mobileTitle}>Навигация</span>
-
-                  <button
-                    type="button"
-                    className={styles.closeButton}
-                    aria-label="Закрыть меню"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <span className={styles.closeLine} />
-                    <span className={styles.closeLine} />
-                  </button>
-                </div>
-
-                {/* Навигация */}
-                <Navigation
-                  ariaLabel="Мобильная навигация"
-                  className={styles.mobileNavigation}
-                  currentHref={currentHash}
-                  items={headerNavigationItems}
-                  orientation="vertical"
-                  onNavigate={handleNavigate}
-                />
-
-                {/* Кнопка вызова - убрал fullWidth */}
-                <Button variant="primary" onClick={handleCall}>
-                  {headerCtaLabel}
-                </Button>
-              </Surface>
-            </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

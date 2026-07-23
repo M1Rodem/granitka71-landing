@@ -1,9 +1,7 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
 
 import styles from './Button.module.css'
-
-type ButtonVariant = 'primary' | 'secondary' | 'ghost'
-type ButtonSize = 'sm' | 'md' | 'lg'
+import type { ButtonSize, ButtonVariant } from './button.types'
 
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
@@ -22,8 +20,9 @@ export function Button({
   type = 'button',
   variant = 'primary',
   ...props
-}: ButtonProps) {
+}: ButtonProps): ReactElement {
   const isDisabled = disabled || isLoading
+
   const classes = [
     styles.button,
     styles[`variant-${variant}`],
@@ -36,15 +35,16 @@ export function Button({
 
   return (
     <button
+      {...props}
       aria-busy={isLoading || undefined}
       className={classes}
       disabled={isDisabled}
       type={type}
-      {...props}
     >
       <span className={styles.content} data-hidden={isLoading}>
         {children}
       </span>
+
       {isLoading ? (
         <span aria-hidden="true" className={styles.spinner} />
       ) : null}

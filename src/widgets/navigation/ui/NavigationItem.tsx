@@ -1,52 +1,37 @@
-import { forwardRef } from 'react'
+import { forwardRef, memo } from 'react'
 
 import type { NavigationItem as NavigationItemModel } from '@/shared/config/navigation'
+import { createClassName } from '@/shared/utils'
 
 import styles from './navigation.module.css'
 
 interface NavigationItemProps {
   item: NavigationItemModel
-  currentHref?: string
+  isActive: boolean
+  isHovered: boolean
   onNavigate?: () => void
   onHover?: () => void
 }
 
-export const NavigationItem = forwardRef<
-  HTMLLIElement,
-  NavigationItemProps
->(function NavigationItem(
-  {
-    item,
-    currentHref,
-    onNavigate,
-    onHover,
-  },
-  ref,
-) {
-  const isActive = currentHref === item.href
-
-  return (
-    <li
-      ref={ref}
-      className={styles.item}
-      onMouseEnter={onHover}
-    >
-      <a
-        href={item.href}
-        className={styles.link}
-        aria-current={isActive ? 'page' : undefined}
-        onClick={onNavigate}
-      >
-        <span
-          className={`${styles.label} ${
-            isActive ? styles.labelActive : ''
-          }`}
+export const NavigationItem = memo(
+  forwardRef<HTMLAnchorElement, NavigationItemProps>(function NavigationItem(
+    { item, isActive, onNavigate, onHover },
+    ref,
+  ) {
+    return (
+      <li className={styles.item} onMouseEnter={onHover} data-item-id={item.id}>
+        <a
+          ref={ref}
+          href={item.href}
+          className={createClassName(styles.link, isActive && styles.linkActive)}
+          aria-current={isActive ? 'page' : undefined}
+          onClick={onNavigate}
         >
-          {item.label}
-        </span>
-      </a>
-    </li>
-  )
-})
+          <span className={styles.label}>{item.label}</span>
+        </a>
+      </li>
+    )
+  }),
+)
 
 NavigationItem.displayName = 'NavigationItem'

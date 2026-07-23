@@ -4,11 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "lint": "eslint . --ignore-pattern '.generated/**'",
+    "lint:fix": "eslint . --fix --ignore-pattern '.generated/**'",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "images:build": "tsx scripts/build-images.ts",
+    "images:watch": "tsx scripts/watch-images.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -27,7 +30,9 @@
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/sharp": "^0.31.1",
     "@vitejs/plugin-react": "^6.0.3",
+    "chokidar": "^3.6.0",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.1.1",
@@ -35,7 +40,10 @@
     "globals": "^17.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.1.0",
+    "p-limit": "^5.0.0",
     "prettier": "^3.9.5",
+    "sharp": "^0.35.3",
+    "tsx": "^4.7.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.0",
     "vite": "^8.1.1"

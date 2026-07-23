@@ -7,6 +7,7 @@
 }
 
 .card {
+  margin-top: -80px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -74,6 +75,9 @@
 }
 
 @media (max-width: 64rem) {
+  .card {
+    margin-top: 0px;
+  }
   .wrapper {
     grid-template-columns: 1fr;
   }

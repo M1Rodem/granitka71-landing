@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import type { HeroData } from '@/entities/hero'
 import { heroRepository } from '@/shared/repository'
 
+export const heroKeys = {
+  root: ['hero'] as const,
+}
+
 export function useHero() {
-  const [data, setData] = useState<HeroData | null>(null)
-
-  useEffect(() => {
-    heroRepository
-      .getHero()
-      .then(setData)
-  }, [])
-
-  return {
-    data,
-    isLoading: data === null,
-  }
+  return useQuery({
+    queryKey: heroKeys.root,
+    queryFn: () => heroRepository.getHero(),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    retry: 1,
+  })
 }

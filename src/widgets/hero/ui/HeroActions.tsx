@@ -1,6 +1,6 @@
 import type { HeroAction } from '@/entities/hero'
 
-import { Button } from '@/shared/ui'
+import { ButtonLink } from '@/shared/ui'
 import { motion } from 'framer-motion'
 
 import { slideUpVariants } from '@/shared/motion'
@@ -17,18 +17,18 @@ export function HeroActions({
 }: HeroActionsProps) {
   return (
     <motion.div
-        variants={slideUpVariants}
-        className={styles.actions}
+      variants={slideUpVariants}
+      className={styles.actions}
     >
-        <Button>
+      <ButtonLink href={primaryAction.href}>
         {primaryAction.label}
-        </Button>
+      </ButtonLink>
 
-        {secondaryAction ? (
-        <Button variant="secondary">
-            {secondaryAction.label}
-        </Button>
-        ) : null}
+      {secondaryAction ? (
+        <ButtonLink href={secondaryAction.href} variant="secondary">
+          {secondaryAction.label}
+        </ButtonLink>
+      ) : null}
     </motion.div>
-    )
+  )
 }

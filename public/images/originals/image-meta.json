@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "alt": "Изготовление памятников Гранитка71",
+    "breakpoints": [480, 768, 1024, 1440],
+    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px",
+    "loading": "eager",
+    "fetchPriority": "high"
+  },
+  "company": {
+    "alt": "Процесс установки памятника",
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
+  }
+}

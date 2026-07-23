@@ -1,25 +1,11 @@
 import { Seo } from '@/shared/lib'
 import { LandingSection } from '@/widgets/landing-section'
 import { Hero } from '@/widgets/hero'
+import { Company } from '@/widgets/company'
+
 import styles from './landing-page.module.css'
 
 const landingSections = [
-  {
-    id: 'hero',
-    title: 'Hero Placeholder',
-    description:
-      'Здесь будет главный первый экран. На текущем этапе секция существует только как композиционное место для будущего widget-слоя.',
-    tone: 'background',
-    variant: 'hero',
-  },
-  {
-    id: 'about',
-    title: 'About Placeholder',
-    description:
-      'Секция подготовлена под будущий блок о компании и может быть заменена на полноценный widget без изменения общей страницы.',
-    tone: 'surface',
-    variant: 'default',
-  },
   {
     id: 'services',
     title: 'Services Placeholder',
@@ -60,24 +46,25 @@ export function LandingPage() {
       <Seo
         canonical="/"
         description="Landing shell Granitka71(Гранитка71) с полноценным layout, навигацией, header/footer и placeholder-структурой под будущие бизнес-секции."
-        title="Granitka71(Гранитка71) — Landing Shell"
+        title="Гранитка71"
       />
 
       <div className={styles.page}>
+
         <Hero />
 
-        {landingSections
-          .filter((section) => section.id !== 'hero')
-          .map((section) => (
-            <LandingSection
-              description={section.description}
-              id={section.id}
-              key={section.id}
-              title={section.title}
-              tone={section.tone}
-              variant={section.variant}
-            />
-          ))}
+        <Company />
+
+        {landingSections.map((section) => (
+          <LandingSection
+            description={section.description}
+            id={section.id}
+            key={section.id}
+            title={section.title}
+            tone={section.tone}
+            variant={section.variant}
+          />
+        ))}
       </div>
     </>
   )

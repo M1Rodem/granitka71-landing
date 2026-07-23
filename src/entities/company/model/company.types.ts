@@ -1,14 +1,12 @@
-export interface CompanyInfo {
+import type { CompanyScrollLink } from './company-scroll-link.types'
 
-  name:string;
+export interface CompanyData {
+  eyebrow: string
+  title: string
+  description: string[]
+  scrollLink: CompanyScrollLink
+}
 
-
-  description:string;
-
-
-  experience?:string;
-
-
-  advantages?:string[];
-
+export interface CompanyResponse extends CompanyData {
+  updatedAt?: string
 }
