@@ -1,6 +1,5 @@
-import type { Service } from '@/entities/service'
-
+import type { ServicesResponse } from '@/entities/service'
 
 export interface ServiceRepository {
-  getAll(): Promise<Service[]>
+  getServices(): Promise<ServicesResponse>
 }

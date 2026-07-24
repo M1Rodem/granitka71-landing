@@ -6,8 +6,33 @@
     "loading": "eager",
     "fetchPriority": "high"
   },
+
   "company": {
     "alt": "Процесс установки памятника",
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
+  },
+
+  "monument": {
+    "alt": "Установка памятника из гранита",
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
+  },
+
+  "landscaping": {
+    "alt": "Благоустройство мемориального участка",
+    "breakpoints": [480, 768, 1024, 1440],
+    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+  },
+
+  "concreting": {
+    "alt": "Бетонирование участка под памятник",
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
+  },
+
+  "paving": {
+    "alt": "Укладка плитки и бордюров на мемориальном участке",
     "breakpoints": [480, 768, 1024],
     "sizes": "(max-width: 768px) 100vw, 50vw"
   }

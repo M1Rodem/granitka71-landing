@@ -1,0 +1,184 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 16rem;
+  padding: var(--space-5);
+  overflow: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    background 0.4s ease;
+  will-change: transform;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(circle at top right, rgb(255 255 255 / 6%), transparent 65%);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgb(176 141 87 / 0.12);
+  color: var(--color-accent);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.4s ease;
+}
+
+.card:hover .iconWrapper {
+  transform: scale(1.05);
+  background: rgb(176 141 87 / 0.2);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.title {
+  transition: color 0.3s ease;
+}
+
+.card:hover .title {
+  color: var(--color-accent);
+}
+
+.description {
+  flex: 1;
+  /* Убираем padding-left — растягиваем на всю ширину */
+}
+
+.button {
+  margin-top: auto;
+  align-self: flex-start;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover .button {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.arrow {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== MOBILE — HOVER РАБОТАЕТ ===== */
+@media (max-width: 48rem) {
+  .card {
+    min-height: auto;
+    padding: var(--space-4);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .card:hover .iconWrapper {
+    transform: scale(1.05);
+  }
+
+  .card:hover .title {
+    color: var(--color-accent);
+  }
+
+  .description {
+    margin-bottom: var(--space-4); /* Добавляем отступ между текстом и кнопкой */
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card:hover .button {
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  }
+
+  .card:hover .arrow {
+    transform: translateX(4px);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::before,
+  .iconWrapper,
+  .button,
+  .arrow {
+    transition: none !important;
+  }
+
+  .card:hover {
+    transform: none !important;
+  }
+
+  .card:hover .iconWrapper {
+    transform: none !important;
+  }
+
+  .card:hover .button {
+    transform: none !important;
+  }
+
+  .card:hover .arrow {
+    transform: none !important;
+  }
+
+  .card:hover::before {
+    opacity: 0;
+  }
+}

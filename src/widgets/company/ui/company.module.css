@@ -7,7 +7,8 @@
     'link image';
 
   align-items: center;
-  gap: var(--space-8) var(--space-16);
+  /* Увеличил горизонтальный gap, так как картинка теперь "тяжелее" */
+  gap: var(--space-10) var(--space-20);
 }
 
 .header {

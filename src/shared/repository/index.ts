@@ -10,11 +10,8 @@ export type { HeroRepository } from './interfaces/hero.repository'
 export type { ServiceRepository } from './interfaces/service.repository'
 export type { CompanyRepository } from './interfaces/company.repository'
 
-export const heroRepository: HeroRepository =
-  new MockHeroRepository()
+export const heroRepository: HeroRepository = new MockHeroRepository()
 
-export const serviceRepository: ServiceRepository =
-  new MockServiceRepository()
+export const serviceRepository: ServiceRepository = new MockServiceRepository()
 
-export const companyRepository: CompanyRepository =
-  new MockCompanyRepository()
+export const companyRepository: CompanyRepository = new MockCompanyRepository()

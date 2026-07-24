@@ -1,0 +1,337 @@
+/* services-hero-card.module.css */
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 40rem;
+  padding: 0;
+  isolation: isolate;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.6s ease,
+    filter 0.6s ease;
+}
+
+.card:hover .image img {
+  transform: scale(1.04);
+  filter: brightness(1.05);
+}
+
+.overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  min-height: 40rem;
+  padding: var(--space-8);
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 20%) 45%,
+    rgb(0 0 0 / 88%) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.card:hover .overlay {
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 25%) 40%,
+    rgb(0 0 0 / 92%) 100%
+  );
+}
+
+/* ===== КОНТЕНТ — КОМПАКТНЫЙ БЛОК ВНИЗУ ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(100%, 44rem);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: var(--radius-xl);
+  background: rgb(255 255 255 / 75%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 60px rgb(0 0 0 / 18%),
+    0 4px 12px rgb(0 0 0 / 10%);
+  max-height: 16rem;
+  overflow: hidden;
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.4s ease,
+    background 0.4s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.card:hover .content {
+  max-height: 30rem; /* достаточно для всего контента */
+  padding: var(--space-6);
+  background: rgb(255 255 255 / 85%);
+  transform: translateY(-8px);
+  box-shadow:
+    0 24px 70px rgb(0 0 0 / 22%),
+    0 6px 16px rgb(0 0 0 / 12%);
+}
+
+.title {
+  max-width: 24rem;
+  transition: margin-bottom 0.4s ease;
+}
+
+/* ===== ОПИСАНИЕ — ПЛАВНОЕ РАСКРЫТИЕ ===== */
+.description {
+  max-width: 38rem;
+  overflow: hidden;
+  max-height: 3.2rem; /* 2 строки */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+  line-height: 1.6;
+}
+
+.card:hover .description {
+  max-height: 14rem; /* полный текст */
+}
+
+/* ===== ПРЕИМУЩЕСТВА — ПОЯВЛЕНИЕ ПОСЛЕ ТЕКСТА ===== */
+.advantages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease 0.25s,
+    opacity 0.35s ease 0.3s,
+    margin 0.3s ease 0.25s;
+}
+
+.card:hover .advantages {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: var(--space-3);
+}
+
+.advantages li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  transform: translateY(10px);
+  opacity: 0;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.card:hover .advantages li:nth-child(1) {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.45s;
+}
+
+.card:hover .advantages li:nth-child(2) {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.55s;
+}
+
+.card:hover .advantages li:nth-child(3) {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.65s;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.ctaButton {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  transition: all 0.3s ease;
+}
+
+.card:hover .ctaButton {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  transform: translateX(4px);
+}
+
+@media (max-width: 64rem) {
+  .card,
+  .overlay {
+    min-height: 34rem;
+  }
+
+  .overlay {
+    padding: var(--space-6);
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 48rem) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    overflow: hidden;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+    background: var(--color-surface);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .image {
+    position: relative;
+    width: 100%;
+    height: 16rem;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .card:hover .image {
+    transform: scale(1.02);
+  }
+
+  .image img {
+    transform: none !important;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.6s ease;
+    will-change: transform;
+  }
+
+  .card:hover .image img {
+    transform: scale(1.04) !important;
+    filter: brightness(1.05) !important;
+  }
+
+  .image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0%) 10%,
+      rgb(0 0 0 / 12%) 60%,
+      rgb(0 0 0 / 55%) 100%
+    );
+    pointer-events: none;
+  }
+
+  .overlay {
+    display: block;
+    min-height: auto;
+    padding: 0;
+    background: none;
+    margin-top: var(--space-3);
+  }
+
+  .card:hover .overlay {
+    background: none;
+  }
+
+  .content {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transform: none;
+    gap: var(--space-3);
+  }
+
+  .card:hover .content {
+    background: transparent;
+    transform: none;
+    max-height: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+
+  .card:hover .title {
+    color: var(--color-accent);
+  }
+
+  .description {
+    max-height: none;
+  }
+
+  .card:hover .description {
+    max-height: none;
+  }
+
+  .advantages {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: var(--space-3);
+  }
+
+  .advantages li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .ctaButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card:hover .ctaButton {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  }
+}

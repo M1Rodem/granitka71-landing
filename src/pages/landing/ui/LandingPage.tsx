@@ -1,19 +1,13 @@
 import { Seo } from '@/shared/lib'
-import { LandingSection } from '@/widgets/landing-section'
-import { Hero } from '@/widgets/hero'
+
 import { Company } from '@/widgets/company'
+import { Hero } from '@/widgets/hero'
+import { Services } from '@/widgets/services'
+import { LandingSection } from '@/widgets/landing-section'
 
 import styles from './landing-page.module.css'
 
 const landingSections = [
-  {
-    id: 'services',
-    title: 'Services Placeholder',
-    description:
-      'Секция зарезервирована для будущего каталога услуг. Сейчас она проверяет layout, sticky navigation и scroll system.',
-    tone: 'background',
-    variant: 'default',
-  },
   {
     id: 'gallery',
     title: 'Gallery Placeholder',
@@ -55,16 +49,18 @@ export function LandingPage() {
 
         <Company />
 
-        {landingSections.map((section) => (
-          <LandingSection
-            description={section.description}
-            id={section.id}
-            key={section.id}
-            title={section.title}
-            tone={section.tone}
-            variant={section.variant}
-          />
-        ))}
+        <Services />
+
+          {landingSections.map((section) => (
+            <LandingSection
+              description={section.description}
+              id={section.id}
+              key={section.id}
+              title={section.title}
+              tone={section.tone}
+              variant={section.variant}
+            />
+          ))}
       </div>
     </>
   )

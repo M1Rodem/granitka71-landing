@@ -4,23 +4,45 @@
   isolation: isolate;
 }
 
+/* Акцентный свет позади картинки (имитация падающего света) */
 .visual::before {
   content: '';
   position: absolute;
-  inset: 10%;
+  /* Смещаем точку света вправо-вниз */
+  top: 5%;
+  left: 15%;
+  right: -5%;
+  bottom: -10%;
   z-index: -1;
   background: var(--color-accent);
-  opacity: var(--opacity-accent-soft);
-  filter: blur(var(--blur-xl));
+  opacity: 0.2;
+  filter: blur(70px); /* Делаем пятно более объемным и мягким */
   border-radius: var(--radius-round);
+  transition: opacity 0.6s ease;
+}
+
+/* При наведении на весь блок слегка усиливаем контровой свет */
+.visual:hover::before {
+  opacity: 0.3;
 }
 
 .visualSurface {
   position: relative;
   overflow: hidden;
   padding: var(--space-3);
+  /* Готовим к плавному тяжелому ховеру */
+  transition:
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* Тяжелый, уверенный ховер (не отрываем от земли, а слегка надвигаем) */
+.visualSurface:hover {
+  transform: scale(1.015);
+  box-shadow: 0 30px 60px -15px rgb(0 0 0 / 0.25);
+}
+
+/* Мобильная версия (без изменений, твои идеальные градиенты) */
 @media (max-width: 64rem) {
   .visual {
     position: absolute;
@@ -35,6 +57,8 @@
     background: transparent;
     border: none;
     box-shadow: none;
+    /* Жестко блокируем любой ховер на тач-устройствах */
+    transform: none !important;
   }
 
   .visual img {

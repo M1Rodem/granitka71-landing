@@ -1,0 +1,152 @@
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-8);
+
+  padding: var(--space-8);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.cta:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 55rem;
+  flex: 1;
+}
+
+.content h2 {
+  transition: color 0.3s ease;
+}
+
+.cta:hover .content h2 {
+  color: var(--color-accent);
+}
+
+.content p {
+  transition: color 0.3s ease;
+}
+
+.cta:hover .content p {
+  color: var(--color-text-primary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.actions > * {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cta:hover .actions > *:first-child {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.cta:hover .actions > *:last-child {
+  transform: translateX(-4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+/* ===== ПЛАНШЕТ ===== */
+@media (max-width: 64rem) {
+  .cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta:hover {
+    transform: translateY(-4px);
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actions > * {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .cta:hover .actions > *:first-child {
+    transform: translateY(-2px);
+  }
+
+  .cta:hover .actions > *:last-child {
+    transform: translateY(-2px);
+  }
+}
+
+/* ===== МОБИЛЬНЫЕ УСТРОЙСТВА ===== */
+@media (max-width: 48rem) {
+  .cta {
+    padding: var(--space-6);
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .actions > * {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta:hover .actions > *:first-child {
+    transform: translateY(-2px);
+  }
+
+  .cta:hover .actions > *:last-child {
+    transform: translateY(-2px);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .content h2,
+  .content p,
+  .actions > * {
+    transition: none !important;
+  }
+
+  .cta:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .cta:hover .content h2 {
+    color: inherit !important;
+  }
+
+  .cta:hover .content p {
+    color: inherit !important;
+  }
+
+  .cta:hover .actions > * {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
