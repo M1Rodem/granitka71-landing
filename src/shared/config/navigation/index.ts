@@ -1,2 +1,2 @@
-export { landingNavigationItems } from './navigation'
-export type { NavigationItem } from './navigation'
+export * from './navigation'
+export type * from './navigation'

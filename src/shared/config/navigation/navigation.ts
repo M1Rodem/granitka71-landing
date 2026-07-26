@@ -6,6 +6,11 @@ export interface NavigationItem {
 
 export const landingNavigationItems: NavigationItem[] = [
   {
+    id: 'hero',
+    label: 'Главная',
+    href: '#hero',
+  },
+  {
     id: 'about',
     label: 'О компании',
     href: '#about',
@@ -14,6 +19,11 @@ export const landingNavigationItems: NavigationItem[] = [
     id: 'services',
     label: 'Услуги',
     href: '#services',
+  },
+  {
+    id: 'why-choose-us',
+    label: 'Почему мы',
+    href: '#why-choose-us',
   },
   {
     id: 'gallery',
@@ -31,3 +41,6 @@ export const landingNavigationItems: NavigationItem[] = [
     href: '#contacts',
   },
 ]
+
+export const headerCtaLabel = 'Позвонить'
+export const headerPhoneHref = 'tel:+79000000000'

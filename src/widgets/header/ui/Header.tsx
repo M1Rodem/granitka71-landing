@@ -11,11 +11,8 @@ import {
   useEscapeClose,
   useHeaderScroll,
 } from '../hooks'
-import {
-  headerCtaLabel,
-  headerNavigationItems,
-  headerPhoneHref,
-} from '../model/navigation'
+
+import { landingNavigationItems, headerCtaLabel, headerPhoneHref } from '@/shared/config/navigation'
 
 import { HeaderDesktop } from './HeaderDesktop'
 import { HeaderMobile } from './HeaderMobile'
@@ -170,7 +167,7 @@ export function Header() {
                 </a>
 
                 <HeaderDesktop
-                  items={headerNavigationItems}
+                  items={landingNavigationItems}
                   currentHash={effectiveHash}
                   ctaLabel={headerCtaLabel}
                   onCtaClick={handleCall}
@@ -194,7 +191,7 @@ export function Header() {
           <>
             <HeaderOverlay onClose={handleCloseMenu} />
             <MobileMenu
-              items={headerNavigationItems}
+              items={landingNavigationItems}
               currentHash={effectiveHash}
               ctaLabel={headerCtaLabel}
               onCtaClick={handleCall}

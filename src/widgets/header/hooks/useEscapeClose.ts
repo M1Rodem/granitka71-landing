@@ -1,12 +1,5 @@
-// widgets/header/hooks/useEscapeClose.ts
-
 import { useEffect } from 'react'
 
-/**
- * Закрывает меню по Escape
- * @param isActive - активен ли слушатель
- * @param onClose - колбэк закрытия
- */
 export function useEscapeClose(
   isActive: boolean,
   onClose: () => void,

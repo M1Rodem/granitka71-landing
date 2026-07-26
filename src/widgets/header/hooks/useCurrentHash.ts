@@ -1,11 +1,5 @@
-// widgets/header/hooks/useCurrentHash.ts
-
 import { useEffect, useState } from 'react'
 
-/**
- * Возвращает текущий хеш из URL
- * Обновляется при hashchange
- */
 export function useCurrentHash(): string {
   const [currentHash, setCurrentHash] = useState<string>(() => {
     if (typeof window === 'undefined') return ''

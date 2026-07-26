@@ -4,6 +4,7 @@ import { Company } from '@/widgets/company'
 import { Hero } from '@/widgets/hero'
 import { Services } from '@/widgets/services'
 import { LandingSection } from '@/widgets/landing-section'
+import { WhyChooseUs } from '@/widgets/why-choose-us'
 
 import styles from './landing-page.module.css'
 
@@ -44,23 +45,24 @@ export function LandingPage() {
       />
 
       <div className={styles.page}>
-
         <Hero />
 
         <Company />
 
         <Services />
 
-          {landingSections.map((section) => (
-            <LandingSection
-              description={section.description}
-              id={section.id}
-              key={section.id}
-              title={section.title}
-              tone={section.tone}
-              variant={section.variant}
-            />
-          ))}
+        <WhyChooseUs />
+
+        {landingSections.map((section) => (
+          <LandingSection
+            description={section.description}
+            id={section.id}
+            key={section.id}
+            title={section.title}
+            tone={section.tone}
+            variant={section.variant}
+          />
+        ))}
       </div>
     </>
   )
