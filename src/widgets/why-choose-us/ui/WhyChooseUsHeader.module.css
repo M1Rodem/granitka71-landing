@@ -24,7 +24,6 @@
     border-color 0.3s ease,
     background 0.3s ease,
     box-shadow 0.3s ease;
-  will-change: transform;
 }
 
 .eyebrow:hover {
@@ -37,7 +36,7 @@
 /* ===== ICON ===== */
 .icon {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+
   flex-shrink: 0;
 }
 

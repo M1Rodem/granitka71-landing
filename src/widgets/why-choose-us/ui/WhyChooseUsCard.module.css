@@ -6,12 +6,14 @@
   min-height: 16rem;
   padding: var(--space-5);
   overflow: hidden;
+  /* ДОБАВЛЕНО: Градиент для эффекта камня */
+  background: linear-gradient(145deg, var(--color-surface) 0%, var(--color-surface-muted) 100%);
+  background-size: 200% 200%;
   transition:
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.4s ease,
-    background 0.4s ease;
-  will-change: transform;
+    background-position 0.6s ease; /* ДОБАВЛЕНО */
 }
 
 .card::before {
@@ -28,6 +30,8 @@
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
+  /* ДОБАВЛЕНО: Сдвиг градиента при наведении */
+  background-position: 100% 100%;
 }
 
 .card:hover::before {
@@ -64,8 +68,9 @@
     background 0.4s ease;
 }
 
+/* ИЗМЕНЕНО: Иконка теперь поворачивается как кристалл */
 .card:hover .iconWrapper {
-  transform: scale(1.05);
+  transform: rotate(-8deg) scale(1.1);
   background: rgb(176 141 87 / 0.2);
 }
 
@@ -85,18 +90,24 @@
   flex: 1;
 }
 
+/* ИЗМЕНЕНО: Скрытая кнопка (эффект проявления) */
 .button {
   margin-top: auto;
   align-self: flex-start;
+  opacity: 0.5; /* Полупрозрачная изначально */
+  transform: translateY(4px); /* Слегка опущена */
   transition:
+    opacity 0.3s ease,
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease,
     color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
+/* При наведении на карточку кнопка "выеезжает" и становится яркой */
 .card:hover .button {
-  transform: translateX(4px);
+  opacity: 1;
+  transform: translateY(0) translateX(4px);
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
 }
 
@@ -115,6 +126,14 @@
     padding: var(--space-4);
   }
 
+  /* НА МОБИЛКЕ КНОПКА ВСЕГДА ВИДНА (там нет ховера) */
+  .button {
+    opacity: 1;
+    transform: translateY(0);
+    width: 100%;
+    justify-content: center;
+  }
+
   .card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
@@ -125,7 +144,7 @@
   }
 
   .card:hover .iconWrapper {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Без поворота на тач-экранах */
   }
 
   .card:hover .title {
@@ -134,11 +153,6 @@
 
   .description {
     margin-bottom: var(--space-4);
-  }
-
-  .button {
-    width: 100%;
-    justify-content: center;
   }
 
   .card:hover .button {
@@ -163,6 +177,7 @@
 
   .card:hover {
     transform: none !important;
+    background-position: 0% 0% !important; /* Отключаем сдвиг */
   }
 
   .card:hover .iconWrapper {
@@ -171,6 +186,7 @@
 
   .card:hover .button {
     transform: none !important;
+    opacity: 1 !important; /* Всегда видна для доступности */
   }
 
   .card:hover .arrow {

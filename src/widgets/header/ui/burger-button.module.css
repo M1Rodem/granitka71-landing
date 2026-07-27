@@ -56,7 +56,6 @@
   border-radius: var(--radius-round);
   background-color: currentColor;
   transform-origin: center;
-  will-change: transform, opacity, width;
 }
 
 @media (prefers-reduced-motion: reduce) {

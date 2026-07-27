@@ -1,13 +1,14 @@
 .card {
   position: relative;
   overflow: hidden;
+  height: 100%;
+  /* ДОБАВЛЕНО: Место под золотую линию слева */
+  border-left: 4px solid transparent;
   transition:
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.4s ease,
     background 0.4s ease,
     box-shadow 0.4s ease;
-  will-change: transform;
-  height: 100%;
 }
 
 .card::before {
@@ -22,8 +23,10 @@
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px); /* Приподнимается чуть выше маленьких */
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.2); /* Более тяжелая тень */
+  /* ДОБАВЛЕНО: Появление золотой линии */
+  border-left-color: var(--color-accent);
 }
 
 .card:hover::before {
@@ -64,7 +67,7 @@
 }
 
 .card:hover .iconWrapper {
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(-5deg);
   background: rgb(176 141 87 / 0.2);
   border-color: rgb(176 141 87 / 0.4);
 }
@@ -143,6 +146,11 @@
 }
 
 @media (max-width: 640px) {
+  /* На мобилках убираем левую полосу, чтобы не ломать верстку */
+  .card {
+    border-left: none;
+  }
+
   .content {
     padding: var(--space-4);
     gap: var(--space-4);
@@ -182,6 +190,7 @@
   .card:hover {
     transform: none !important;
     box-shadow: none !important;
+    border-left-color: transparent !important; /* Отключаем полосу */
   }
 
   .card:hover .iconWrapper {
