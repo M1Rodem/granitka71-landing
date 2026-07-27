@@ -5,24 +5,17 @@ import { Hero } from '@/widgets/hero'
 import { Services } from '@/widgets/services'
 import { LandingSection } from '@/widgets/landing-section'
 import { WhyChooseUs } from '@/widgets/why-choose-us'
+import { Gallery } from '@/widgets/gallery'
 
 import styles from './landing-page.module.css'
 
 const landingSections = [
   {
-    id: 'gallery',
-    title: 'Gallery Placeholder',
-    description:
-      'Здесь позже появится галерея работ. Пока блок нужен как shell-структура для навигации, контейнеров и motion-потока страницы.',
-    tone: 'surface',
-    variant: 'default',
-  },
-  {
     id: 'reviews',
     title: 'Reviews Placeholder',
     description:
       'Секция отзывов пока не наполнена контентом и служит только маркером будущего widget-а в landing shell.',
-    tone: 'background',
+    tone: 'surface',
     variant: 'default',
   },
   {
@@ -30,7 +23,7 @@ const landingSections = [
     title: 'Contacts Placeholder',
     description:
       'Контактный блок будет интегрирован позже. Сейчас сохранена только точка в структуре страницы и якорная навигация.',
-    tone: 'surface',
+    tone: 'background',
     variant: 'default',
   },
 ] as const
@@ -52,6 +45,8 @@ export function LandingPage() {
         <Services />
 
         <WhyChooseUs />
+
+        <Gallery />
 
         {landingSections.map((section) => (
           <LandingSection

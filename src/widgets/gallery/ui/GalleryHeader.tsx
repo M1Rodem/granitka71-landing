@@ -1,32 +1,32 @@
 import { motion } from 'framer-motion'
-import { ShieldCheck } from 'lucide-react'
+import { ImageIcon } from 'lucide-react'
 
+import { createClassName } from '@/shared/utils'
 import { slideUpVariants } from '@/shared/motion'
 import { Heading, Text } from '@/shared/ui'
-import { createClassName } from '@/shared/utils'
 
-import styles from './why-choose-us-header.module.css'
+import styles from './gallery-header.module.css'
 
-interface WhyChooseUsHeaderProps {
+interface GalleryHeaderProps {
   className?: string
   eyebrow: string
   title: string
   description: string
 }
 
-export function WhyChooseUsHeader({
+export function GalleryHeader({
   className,
   eyebrow,
   title,
   description,
-}: WhyChooseUsHeaderProps) {
+}: GalleryHeaderProps) {
   return (
     <motion.div
       className={createClassName(styles.content, className)}
       variants={slideUpVariants}
     >
       <div className={styles.eyebrow}>
-        <ShieldCheck size={16} className={styles.icon} />
+        <ImageIcon size={16} className={styles.icon} />
         <Text
           size="sm"
           tone="accent"
@@ -37,18 +37,11 @@ export function WhyChooseUsHeader({
         </Text>
       </div>
 
-      <Heading
-        level={2}
-        className={styles.heading}
-      >
+      <Heading className={styles.heading} level={2}>
         {title}
       </Heading>
 
-      <Text
-        size="lg"
-        tone="muted"
-        className={styles.description}
-      >
+      <Text className={styles.description} size="lg" tone="muted">
         {description}
       </Text>
     </motion.div>

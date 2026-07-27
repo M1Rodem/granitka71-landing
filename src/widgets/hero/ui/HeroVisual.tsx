@@ -4,7 +4,7 @@ import { scaleInVariants } from '@/shared/motion'
 import { Surface, Image } from '@/shared/ui'
 import { getImage } from '@/shared/lib/image/ImageRegistry'
 
-import styles from './herovisual.module.css'
+import styles from './hero-visual.module.css'
 
 export function HeroVisual() {
   const heroImage = getImage('hero')

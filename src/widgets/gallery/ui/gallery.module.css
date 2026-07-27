@@ -1,0 +1,63 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* ===========================
+   Skeleton
+=========================== */
+
+.skeletonHeader {
+  width: 100%;
+  max-width: 48rem;
+  height: 10rem;
+
+  margin-inline: auto;
+
+  border-radius: var(--radius-2xl);
+
+  background: var(--color-surface-secondary);
+}
+
+.skeletonCarousel {
+  width: 100%;
+  min-height: 32rem;
+
+  border-radius: var(--radius-3xl);
+
+  background: var(--color-surface-secondary);
+}
+
+.skeletonCta {
+  width: 100%;
+  min-height: 14rem;
+
+  border-radius: var(--radius-3xl);
+
+  background: var(--color-surface-secondary);
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 1024px) {
+  .section {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    gap: 2.5rem;
+  }
+
+  .skeletonCarousel {
+    min-height: 24rem;
+  }
+
+  .skeletonCta {
+    min-height: 12rem;
+  }
+}

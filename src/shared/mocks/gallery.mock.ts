@@ -1,30 +1,90 @@
-import type { GalleryItem } from '@/entities/gallery'
+import type { GalleryData } from '@/entities/gallery'
 
-import { mockMedia } from './media.mock'
-
-
-export const galleryMock: GalleryItem[] = [
-
-  {
-    id:'gallery-1',
-
-    title:
-      'Гранитный памятник',
-
+export const galleryMock: GalleryData = {
+  header: {
+    eyebrow: 'Наши работы',
+    title: 'Галерея выполненных работ',
     description:
-      'Индивидуальное изготовление',
-
-    image:
-      mockMedia.monument,
-
-    category:
-      'Памятники',
-
-    order:
-      1,
-
-    isVisible:
-      true,
+      'Каждая работа выполняется с уважением к памяти близких, вниманием к деталям и ответственностью за результат.',
   },
 
-]
+  cta: {
+    title: 'Понравились наши работы?',
+    description:
+      'Свяжитесь с нами — бесплатно проконсультируем, ответим на вопросы и поможем подобрать оптимальное решение.',
+    buttonLabel: 'Получить консультацию',
+    buttonHref: '#contacts',
+  },
+
+  items: [
+    {
+      id: 'gallery-1',
+      imageId: 'gallery-1',
+      title: 'Мемориальный комплекс',
+      description:
+        'Изготовление и установка мемориального комплекса из натурального гранита с полным благоустройством участка.',
+      isVisible: true,
+      order: 1,
+    },
+
+    {
+      id: 'gallery-2',
+      imageId: 'gallery-2',
+      title: 'Семейный памятник',
+      description:
+        'Двойной памятник из полированного гранита по индивидуальному проекту с художественной гравировкой.',
+      isVisible: true,
+      order: 2,
+    },
+
+    {
+      id: 'gallery-3',
+      imageId: 'gallery-3',
+      title: 'Благоустройство захоронения',
+      description:
+        'Комплексное оформление участка: гранитная плитка, цветник, ограждение и декоративные элементы.',
+      isVisible: true,
+      order: 3,
+    },
+
+    {
+      id: 'gallery-4',
+      imageId: 'gallery-4',
+      title: 'Памятник из черного гранита',
+      description:
+        'Классический памятник из высококачественного гранита с профессиональной установкой и гарантией.',
+      isVisible: true,
+      order: 4,
+    },
+
+    {
+      id: 'gallery-5',
+      imageId: 'gallery-5',
+      title: 'Гранитный комплекс с плиткой',
+      description:
+        'Полный комплекс работ с облицовкой участка гранитной плиткой и установкой дополнительных элементов.',
+      isVisible: true,
+      order: 5,
+    },
+
+    {
+      id: 'gallery-6',
+      imageId: 'gallery-6',
+      title: 'Эксклюзивный проект',
+      description:
+        'Индивидуальный мемориальный комплекс, разработанный с учетом пожеланий семьи и особенностей участка.',
+      isVisible: true,
+      order: 6,
+    },
+
+    {
+      id: 'gallery-7',
+      imageId: 'gallery-7',
+      title: 'Комплекс "под ключ"',
+      description:
+        'Полный цикл работ — от изготовления памятника до благоустройства территории и финальной установки.',
+      isVisible: true,
+      order: 7,
+    },
+  ],
+}

@@ -1,1 +1,1 @@
-export type { GalleryItem } from './model/gallery.types';
+export * from './model/gallery.types' 

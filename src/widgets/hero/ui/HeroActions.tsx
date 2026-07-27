@@ -4,7 +4,8 @@ import { ButtonLink } from '@/shared/ui'
 import { motion } from 'framer-motion'
 
 import { slideUpVariants } from '@/shared/motion'
-import styles from './heroactions.module.css'
+
+import styles from './hero-actions.module.css'
 
 interface HeroActionsProps {
   primaryAction: HeroAction

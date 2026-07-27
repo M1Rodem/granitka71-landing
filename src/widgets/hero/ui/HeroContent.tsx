@@ -3,7 +3,8 @@ import { Gem } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Heading, Text } from '@/shared/ui'
 import { slideUpVariants } from '@/shared/motion'
-import styles from './HeroContent.module.css'
+
+import styles from './hero-content.module.css'
 
 interface HeroContentProps {
   data: HeroData

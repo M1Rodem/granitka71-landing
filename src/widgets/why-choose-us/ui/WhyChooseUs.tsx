@@ -9,14 +9,14 @@ import { WhyChooseUsCard } from './WhyChooseUsCard'
 import { WhyChooseUsHeader } from './WhyChooseUsHeader'
 import { WhyChooseUsMainCard } from './WhyChooseUsMainCard'
 
-import styles from './WhyChooseUs.module.css'
+import styles from './why-choose-us.module.css'
 
 export function WhyChooseUs() {
   const { data, isLoading, error } = useWhyChooseUsSection()
 
   if (isLoading) {
     return (
-      <Section id="why-choose-us" tone="background">
+      <Section id="why-choose-us" tone="surface">
         <Container>
           <div className={styles.section}>
             <div className={styles.skeletonHeader} />
@@ -30,7 +30,7 @@ export function WhyChooseUs() {
 
   if (error || !data) {
     return (
-      <Section id="why-choose-us" tone="background">
+      <Section id="why-choose-us" tone="surface">
         <Container>
           <div className={styles.section}>
             <Text tone="muted">
@@ -49,7 +49,7 @@ export function WhyChooseUs() {
   return (
     <Section
       id="why-choose-us"
-      tone="background"
+      tone="surface"
     >
       <Container>
         <motion.div

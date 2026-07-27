@@ -13,7 +13,7 @@ import {
 
 import { WhyChooseUsIcon } from './WhyChooseUsIcon'
 
-import styles from './WhyChooseUsMainCard.module.css'
+import styles from './why-choose-us-main-card.module.css'
 
 interface WhyChooseUsMainCardProps {
   card: WhyChooseUsMainCardType
