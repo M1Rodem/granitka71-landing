@@ -33,7 +33,6 @@ export function saveManifest(images: Record<string, ImageManifestEntry>): void {
   const manifestPath = path.join(MANIFEST_DIR, 'manifest.json')
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 
-  // index.ts — с типизацией
   const indexContent = `// AUTO-GENERATED — DO NOT EDIT
 import manifest from './manifest.json'
 import type { ImageManifest } from '../../src/shared/lib/image/types'
@@ -43,7 +42,6 @@ export default manifest
 `
   fs.writeFileSync(path.join(MANIFEST_DIR, 'index.ts'), indexContent)
 
-  // types.ts
   const typesContent = `import type { ImageManifestEntry } from '../../src/shared/lib/image/types'
 
 export type ImageManifest = Record<string, ImageManifestEntry>
@@ -57,9 +55,6 @@ export function cleanOrphanFiles(manifest: Record<string, ImageManifestEntry>): 
   const valid = new Set<string>()
   for (const entry of Object.values(manifest)) {
     for (const f of entry.formats.avif) {
-      valid.add(f.src.replace('/images/generated/', ''))
-    }
-    for (const f of entry.formats.webp) {
       valid.add(f.src.replace('/images/generated/', ''))
     }
     for (const f of entry.formats.fallback) {

@@ -35,11 +35,6 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
           sizes={sizes || '100vw'}
         />
         <source
-          type="image/webp"
-          srcSet={buildSrcSet(formats.webp)}
-          sizes={sizes || '100vw'}
-        />
-        <source
           srcSet={buildSrcSet(formats.fallback)}
           sizes={sizes || '100vw'}
         />

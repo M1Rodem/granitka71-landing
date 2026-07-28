@@ -17,89 +17,116 @@ import { loadManifest, saveManifest, cleanOrphanFiles } from './manifest.js'
 import { loadMeta } from './metadata.js'
 import { processImage } from './generator.js'
 
-export async function buildImages(fileName?: string): Promise<void> {
-  ensureDir(GENERATED_DIR)
-  ensureDir(MANIFEST_DIR)
+let isRunning = false
+let lastRunPromise: Promise<void> | null = null
 
-  const images = getImageFiles()
-  const meta = loadMeta()
-
-  if (images.length === 0) {
-    saveManifest({})
-    saveCache({})
-    return
+export async function buildImages(fileName?: string, options?: { force?: boolean }): Promise<void> {
+  if (isRunning && lastRunPromise) {
+    return lastRunPromise
   }
 
-  if (checkConflicts(images)) {
-    throw new Error('[images] Name conflicts detected')
-  }
+  isRunning = true
 
-  const toProcess = fileName
-    ? images.filter((f) => path.parse(f).name === fileName)
-    : images
+  const run = async () => {
+    try {
+      ensureDir(GENERATED_DIR)
+      ensureDir(MANIFEST_DIR)
 
-  if (fileName && toProcess.length === 0) {
-    throw new Error(`[images] File ${fileName} not found`)
-  }
+      const images = getImageFiles()
+      const meta = loadMeta()
 
-  const cache = loadCache()
-  const existingManifest = loadManifest()
-  const manifest = existingManifest ? { ...existingManifest.images } : {}
-  const limit = pLimit(CONCURRENCY)
+      if (images.length === 0) {
+        saveManifest({})
+        saveCache({})
+        cleanOrphanFiles({})
+        return
+      }
 
-  let updated = 0
-  let cached = 0
+      if (checkConflicts(images)) {
+        throw new Error('[images] Name conflicts detected')
+      }
 
-  // Проверяем кэш и решаем, нужно ли генерировать
-  const toGenerate: string[] = []
-  const cachedNames: string[] = []
+      const toProcess = fileName
+        ? images.filter((f) => path.parse(f).name === fileName)
+        : images
 
-  for (const img of toProcess) {
-    const name = path.parse(img).name
-    const inputPath = path.join(ORIGINALS_DIR, img)
-    const currentHash = getFileHash(inputPath)
+      if (fileName && toProcess.length === 0) {
+        throw new Error(`[images] File ${fileName} not found`)
+      }
 
-    const breakpoints = meta[name]?.breakpoints || DEFAULT_BREAKPOINTS
-    const cachedHash = cache[name]?.sourceHash
+      const cache = loadCache()
+      
+      // Если force === true — не загружаем старый manifest, создаём новый
+      const existingManifest = options?.force ? null : loadManifest()
+      const manifest = existingManifest ? { ...existingManifest.images } : {}
+      
+      const limit = pLimit(CONCURRENCY)
 
-    // Правильное сравнение: новый SHA с SHA из кэша
-    const isCached =
-      cachedHash === currentHash &&
-      checkGeneratedFilesExist(name, breakpoints) &&
-      manifest[name]
+      let updated = 0
+      let cached = 0
 
-    if (isCached) {
-      cachedNames.push(name)
-    } else {
-      toGenerate.push(img)
-    }
-  }
+      const toGenerate: string[] = []
+      const cachedNames: string[] = []
 
-  // Генерируем только те, что не в кэше
-  await Promise.all(
-    toGenerate.map((img) =>
-      limit(async () => {
-        const result = await processImage(img, meta, cache)
-        if (result) {
-          manifest[result.name] = result.entry
-          updated++
+      for (const img of toProcess) {
+        const name = path.parse(img).name
+        const inputPath = path.join(ORIGINALS_DIR, img)
+        const currentHash = getFileHash(inputPath)
+
+        const breakpoints = meta[name]?.breakpoints || DEFAULT_BREAKPOINTS
+        const cachedHash = cache[name]?.sourceHash
+
+        const isCached =
+          cachedHash === currentHash &&
+          checkGeneratedFilesExist(name, breakpoints) &&
+          manifest[name]
+
+        if (isCached) {
+          cachedNames.push(name)
+        } else {
+          toGenerate.push(img)
         }
-        return result
-      })
-    )
-  )
+      }
 
-  for (const name of cachedNames) {
-    if (manifest[name]) {
-      cached++
+      await Promise.all(
+        toGenerate.map((img) =>
+          limit(async () => {
+            const result = await processImage(img, meta, cache)
+            if (result) {
+              manifest[result.name] = result.entry
+              updated++
+            }
+            return result
+          })
+        )
+      )
+
+      for (const name of cachedNames) {
+        if (manifest[name]) {
+          cached++
+        }
+      }
+
+      const currentImageNames = new Set(images.map((f) => path.parse(f).name))
+      for (const key of Object.keys(manifest)) {
+        if (!currentImageNames.has(key)) {
+          delete manifest[key]
+        }
+      }
+
+      saveManifest(manifest)
+      saveCache(cache)
+      cleanOrphanFiles(manifest)
+
+      if (updated > 0 || cached > 0) {
+        console.log(`Images: ${toProcess.length} checked, ${updated} updated, ${cached} cached`)
+      }
+    } finally {
+      isRunning = false
+      lastRunPromise = null
     }
   }
 
-  saveManifest(manifest)
-  saveCache(cache)
-  cleanOrphanFiles(manifest)
-
-  if (updated > 0 || cached > 0) {
-    console.log(`Images: ${toProcess.length} checked, ${updated} updated, ${cached} cached`)
-  }
+  lastRunPromise = run()
+  return lastRunPromise
 }

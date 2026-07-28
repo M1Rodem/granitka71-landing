@@ -8,8 +8,8 @@ export const GENERATED_DIR = path.join(ROOT, 'public/images/generated')
 export const MANIFEST_DIR = path.join(ROOT, '.generated/images')
 export const CACHE_FILE = path.join(ROOT, '.image-cache.json')
 
-export const DEFAULT_BREAKPOINTS = [480, 768, 1024, 1440]
-export const QUALITY = { avif: 55, webp: 80, jpg: 82 }
+export const DEFAULT_BREAKPOINTS = [480, 768, 1024] // 1440 убран
+export const QUALITY = { avif: 55, jpg: 82 } // webp убран
 export const CONCURRENCY = 4
 
 export function ensureDir(dir: string): void {
@@ -52,7 +52,7 @@ export function calculateAspectRatio(w: number, h: number): number {
 
 export function checkGeneratedFilesExist(name: string, breakpoints: number[]): boolean {
   for (const width of breakpoints) {
-    for (const ext of ['avif', 'webp', 'jpg']) {
+    for (const ext of ['avif', 'jpg']) { // webp убран
       const p = path.join(GENERATED_DIR, `${name}-${width}.${ext}`)
       if (!fs.existsSync(p)) return false
     }

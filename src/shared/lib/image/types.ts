@@ -1,4 +1,4 @@
-export type ImageFormat = 'avif' | 'webp' | 'jpeg' | 'png'
+export type ImageFormat = 'avif' | 'jpeg' | 'png'
 
 export interface ImageSource {
   src: string
@@ -18,7 +18,6 @@ export interface ImageManifestEntry {
   fetchPriority?: 'high' | 'low' | 'auto'
   formats: {
     avif: ImageSource[]
-    webp: ImageSource[]
     fallback: ImageSource[]
   }
 }

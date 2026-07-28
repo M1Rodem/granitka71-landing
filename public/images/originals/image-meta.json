@@ -39,43 +39,43 @@
 
   "gallery-1": {
     "alt": "Мемориальный комплекс из черного гранита с благоустройством",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-2": {
     "alt": "Семейный памятник из полированного гранита",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-3": {
     "alt": "Благоустроенный мемориальный участок с гранитной плиткой",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-4": {
     "alt": "Памятник из черного гранита с художественной гравировкой",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-5": {
     "alt": "Мемориальный комплекс с облицовкой гранитной плиткой",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-6": {
     "alt": "Эксклюзивный мемориальный комплекс по индивидуальному проекту",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   },
 
   "gallery-7": {
     "alt": "Комплексное благоустройство места захоронения под ключ",
-    "breakpoints": [480, 768, 1024, 1440],
-    "sizes": "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+    "breakpoints": [480, 768, 1024],
+    "sizes": "(max-width: 768px) 100vw, 50vw"
   }
 }

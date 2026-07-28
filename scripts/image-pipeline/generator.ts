@@ -26,7 +26,6 @@ export async function processImage(
   const breakpoints = imageMeta.breakpoints || DEFAULT_BREAKPOINTS
   const currentHash = getFileHash(inputPath)
 
-  // Проверяем кэш
   if (cache[name]?.sourceHash === currentHash && checkGeneratedFilesExist(name, breakpoints)) {
     return null
   }
@@ -38,14 +37,12 @@ export async function processImage(
 
   const formats = {
     avif: [] as Array<{ src: string; width: number; height: number; format: 'avif' }>,
-    webp: [] as Array<{ src: string; width: number; height: number; format: 'webp' }>,
     fallback: [] as Array<{ src: string; width: number; height: number }>,
   }
 
   for (const width of breakpoints) {
     const height = Math.round(width / aspectRatio)
 
-    // Генерируем все форматы и получаем реальные размеры
     const sizes = await generateAllFormats(inputPath, name, width, height)
 
     formats.avif.push({
@@ -53,12 +50,6 @@ export async function processImage(
       width: sizes.avifWidth,
       height: sizes.avifHeight,
       format: 'avif',
-    })
-    formats.webp.push({
-      src: `/images/generated/${name}-${width}.webp`,
-      width: sizes.webpWidth,
-      height: sizes.webpHeight,
-      format: 'webp',
     })
     formats.fallback.push({
       src: `/images/generated/${name}-${width}.jpg`,

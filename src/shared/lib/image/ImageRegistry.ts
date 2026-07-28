@@ -11,7 +11,6 @@ const PLACEHOLDER: ImageManifestEntry = {
   aspectRatio: 1.333,
   formats: {
     avif: [{ src: '/placeholder.avif', width: 800, height: 600, format: 'avif' }],
-    webp: [{ src: '/placeholder.webp', width: 800, height: 600, format: 'webp' }],
     fallback: [{ src: '/placeholder.jpg', width: 800, height: 600 }],
   },
 }
