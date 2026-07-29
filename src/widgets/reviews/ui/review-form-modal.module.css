@@ -1,0 +1,149 @@
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: min(90vh, 40rem);
+  overflow: auto;
+  padding: var(--space-8);
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 30rem;
+  padding: var(--space-8);
+  text-align: center;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.noticeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-accent);
+  background: rgb(176 141 87 / 0.14);
+  border: 1px solid rgb(176 141 87 / 0.35);
+  border-radius: 50%;
+}
+
+.description {
+  line-height: 1.7;
+}
+
+.emailWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 24rem;
+  padding: var(--space-3);
+  background: rgb(176 141 87 / 0.08);
+  border: 1px solid rgb(176 141 87 / 0.2);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.emailWrapper:hover {
+  border-color: var(--color-accent);
+  background: rgb(176 141 87 / 0.12);
+}
+
+.emailButton {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.emailButton:hover {
+  color: var(--color-accent);
+}
+
+.emailText {
+  display: block;
+  word-break: break-all;
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgb(176 141 87 / 0.08);
+}
+
+.copyButton:active {
+  transform: scale(0.95);
+}
+
+.copyLabel {
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 48rem) {
+  .modal {
+    padding: var(--space-6);
+  }
+  .notice {
+    padding: var(--space-6);
+  }
+  .emailWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+  .emailButton {
+    text-align: center;
+    font-size: var(--text-sm);
+    padding: var(--space-2);
+  }
+  .copyButton {
+    justify-content: center;
+    padding: var(--space-2);
+  }
+  .copyLabel {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .notice,
+  .emailWrapper,
+  .copyButton {
+    transition: none !important;
+  }
+  .copyButton:active {
+    transform: none !important;
+  }
+}

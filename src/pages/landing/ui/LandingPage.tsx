@@ -6,18 +6,10 @@ import { Services } from '@/widgets/services'
 import { LandingSection } from '@/widgets/landing-section'
 import { WhyChooseUs } from '@/widgets/why-choose-us'
 import { Gallery } from '@/widgets/gallery'
-
+import { Reviews } from '@/widgets/reviews'
 import styles from './landing-page.module.css'
 
 const landingSections = [
-  {
-    id: 'reviews',
-    title: 'Reviews Placeholder',
-    description:
-      'Секция отзывов пока не наполнена контентом и служит только маркером будущего widget-а в landing shell.',
-    tone: 'surface',
-    variant: 'default',
-  },
   {
     id: 'contacts',
     title: 'Contacts Placeholder',
@@ -47,6 +39,8 @@ export function LandingPage() {
         <WhyChooseUs />
 
         <Gallery />
+
+        <Reviews />
 
         {landingSections.map((section) => (
           <LandingSection

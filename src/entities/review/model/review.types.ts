@@ -1,26 +1,32 @@
+export interface ReviewsHeaderData {
+  eyebrow: string
+  title: string
+  description: string
+}
+
+export interface ReviewsCTAData {
+  title: string
+  description: string
+  buttonLabel: string
+}
+
 export interface Review {
+  id: string
+  name: string
+  title: string
+  text: string
+  rating: number | null
+  imageId: string
+  createdAt: string
+  updatedAt?: string
+  order: number
+  isVisible: boolean
+  isPinned?: boolean
+  status: 'pending' | 'published' | 'rejected'
+}
 
-  id: string;
-
-
-  author: string;
-
-
-  text: string;
-
-
-  date?: string;
-
-
-  avatar?: string;
-
-
-  rating?: number;
-
-
-  isVisible: boolean;
-
-
-  order:number;
-
+export interface ReviewsData {
+  header: ReviewsHeaderData
+  cta: ReviewsCTAData
+  reviews: Review[]
 }

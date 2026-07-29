@@ -32,7 +32,6 @@ export function useNavigationPill({
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false
 
-  // Ищем hero или первый элемент как default
   const defaultId = items.find((item) => item.id === 'hero')?.id || items[0]?.id || null
   const activeId = items.find((item) => item.href === currentHref)?.id || defaultId
   const activeHover = hoveredId || hoveredItem
@@ -136,6 +135,18 @@ export function useNavigationPill({
     itemRefs.current[id] = el
   }, [])
 
+  // Обновляем pill при изменении activeId
+  // Используем useEffect с таймером для отложенного обновления
+  useEffect(() => {
+    if (!activeId) return
+
+    const timer = requestAnimationFrame(() => {
+      updatePill(activeId)
+    })
+
+    return () => cancelAnimationFrame(timer)
+  }, [activeId, updatePill])
+
   useEffect(() => {
     return () => {
       cancelAnimationFrame(rafRef.current)
@@ -169,40 +180,6 @@ export function useNavigationPill({
     observer.observe(wrapper)
     return () => observer.disconnect()
   }, [activeId, activeHover, isHovering, updatePill])
-
-  useEffect(() => {
-    if (!listRef.current) return
-
-    const sections = items
-      .map(i => document.querySelector(i.href))
-      .filter((el): el is Element => el !== null)
-
-    if (sections.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-
-        if (visible && !isHovering) {
-          const id = visible.target.id
-          const item = items.find(i => i.href === `#${id}`)
-          if (item) {
-            updatePill(item.id)
-          }
-        }
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    )
-
-    sections.forEach(s => observer.observe(s))
-
-    return () => {
-      sections.forEach(s => observer.unobserve(s))
-      observer.disconnect()
-    }
-  }, [items, isHovering, updatePill])
 
   return {
     listRef,

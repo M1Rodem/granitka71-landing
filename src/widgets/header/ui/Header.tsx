@@ -4,15 +4,15 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import logo from '@/shared/assets/images/logo/logo.png'
 import { Container, Surface } from '@/shared/ui'
 import { createClassName } from '@/shared/utils'
+import { useActiveSection } from '@/shared/hooks/useActiveSection'
+import { useSmoothScroll } from '@/shared/hooks/useSmoothScroll'
+import { landingNavigationItems, headerCtaLabel, headerPhoneHref } from '@/shared/config/navigation'
 
 import {
   useBodyScrollLock,
-  useCurrentHash,
   useEscapeClose,
   useHeaderScroll,
 } from '../hooks'
-
-import { landingNavigationItems, headerCtaLabel, headerPhoneHref } from '@/shared/config/navigation'
 
 import { HeaderDesktop } from './HeaderDesktop'
 import { HeaderMobile } from './HeaderMobile'
@@ -20,6 +20,8 @@ import { HeaderOverlay } from './HeaderOverlay'
 import { MobileMenu } from './MobileMenu'
 
 import styles from './header.module.css'
+
+const sectionIds = landingNavigationItems.map((item) => item.id)
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -30,8 +32,9 @@ export function Header() {
   const logoRafRef = useRef<number>(0)
 
   const isScrolled = useHeaderScroll()
-  const currentHash = useCurrentHash()
   const prefersReducedMotion = useReducedMotion()
+  const activeSection = useActiveSection({ sectionIds })
+  const scrollTo = useSmoothScroll()
 
   useBodyScrollLock(isMenuOpen)
   useEscapeClose(isMenuOpen, () => setIsMenuOpen(false))
@@ -104,7 +107,14 @@ export function Header() {
     setHoveredNavId(id)
   }, [])
 
-  const effectiveHash = currentHash || '#hero'
+  const handleItemClick = useCallback(
+    (id: string) => {
+      scrollTo(id)
+    },
+    [scrollTo],
+  )
+
+  const currentHash = `#${activeSection}`
 
   return (
     <>
@@ -168,12 +178,13 @@ export function Header() {
 
                 <HeaderDesktop
                   items={landingNavigationItems}
-                  currentHash={effectiveHash}
+                  currentHash={currentHash}
                   ctaLabel={headerCtaLabel}
                   onCtaClick={handleCall}
                   onNavigate={handleNavigate}
                   onNavHover={handleNavHover}
                   hoveredNavId={hoveredNavId}
+                  onItemClick={handleItemClick}
                 />
 
                 <HeaderMobile
@@ -192,12 +203,13 @@ export function Header() {
             <HeaderOverlay onClose={handleCloseMenu} />
             <MobileMenu
               items={landingNavigationItems}
-              currentHash={effectiveHash}
+              currentHash={currentHash}
               ctaLabel={headerCtaLabel}
               onCtaClick={handleCall}
               onNavigate={handleNavigate}
               onClose={handleCloseMenu}
               headerHeight={headerHeight}
+              onItemClick={handleItemClick}
             />
           </>
         )}

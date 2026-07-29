@@ -1,4 +1,4 @@
-export { Heading } from './Heading'
-export { Text } from './Text'
-export type { HeadingProps } from './Heading'
-export type { TextProps } from './Text'
+export * from './Heading'
+export * from './Text'
+export type * from './Heading'
+export type * from './Text'

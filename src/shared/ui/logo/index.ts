@@ -1,3 +1,3 @@
-export { Logo } from './Logo'
-export { LogoSvg } from './LogoSvg'
-export type { LogoProps } from './logo.types'
+export * from './Logo'
+export * from './LogoSvg'
+export type * from './logo.types'

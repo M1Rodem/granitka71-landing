@@ -15,6 +15,7 @@ interface HeaderDesktopProps {
   onNavigate: () => void
   onNavHover: (id: string | null) => void
   hoveredNavId: string | null
+  onItemClick?: (id: string) => void
 }
 
 export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
@@ -27,6 +28,7 @@ export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
       onNavigate,
       onNavHover,
       hoveredNavId,
+      onItemClick,
     },
     ref,
   ) {
@@ -39,6 +41,7 @@ export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
             onNavigate={onNavigate}
             onHoverChange={onNavHover}
             hoveredId={hoveredNavId}
+            onItemClick={onItemClick}
           />
         </div>
 

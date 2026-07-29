@@ -15,6 +15,7 @@ interface NavigationProps {
   orientation?: NavigationOrientation
   onHoverChange?: (id: string | null) => void
   hoveredId?: string | null
+  onItemClick?: (id: string) => void
 }
 
 export function Navigation({
@@ -26,6 +27,7 @@ export function Navigation({
   orientation = 'horizontal',
   onHoverChange,
   hoveredId = null,
+  onItemClick,
 }: NavigationProps) {
   const {
     listRef,
@@ -65,6 +67,7 @@ export function Navigation({
               onNavigate={onNavigate}
               onHover={() => handleHover(item.id)}
               ref={setItemRef(item.id)}
+              onItemClick={onItemClick}
             />
           ))}
         </ul>

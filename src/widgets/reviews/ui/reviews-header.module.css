@@ -1,0 +1,84 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 48rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: max-content;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-accent);
+  cursor: default;
+  background: rgb(176 141 87 / 0.14);
+  border: 1px solid rgb(176 141 87 / 0.35);
+  border-radius: var(--radius-round);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.eyebrow:hover {
+  transform: translateY(-3px);
+  background: rgb(176 141 87 / 0.2);
+  border-color: rgb(176 141 87 / 0.6);
+  box-shadow: 0 8px 30px -8px rgb(176 141 87 / 0.3);
+}
+
+.icon {
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eyebrow:hover .icon {
+  transform: rotate(-10deg) scale(1.15);
+}
+
+.eyebrowText {
+  transition: color 0.3s ease;
+}
+
+.eyebrow:hover .eyebrowText {
+  color: var(--color-accent);
+}
+
+.heading,
+.description {
+  max-width: 42rem;
+}
+
+.description {
+  line-height: 1.7;
+}
+
+@media (max-width: 48rem) {
+  .content {
+    gap: var(--space-5);
+  }
+  .heading,
+  .description {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .icon,
+  .eyebrowText {
+    transition: none !important;
+  }
+  .eyebrow:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .eyebrow:hover .icon {
+    transform: none !important;
+  }
+}

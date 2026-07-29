@@ -1,0 +1,153 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 48rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.image,
+.name,
+.subtitle,
+.text,
+.textShort,
+.eyebrow,
+.title,
+.description,
+.cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: rgb(255 255 255 / 0.05);
+}
+
+.image::before,
+.name::before,
+.subtitle::before,
+.text::before,
+.textShort::before,
+.eyebrow::before,
+.title::before,
+.description::before,
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+.eyebrow {
+  width: 9rem;
+  height: 2rem;
+  border-radius: var(--radius-round);
+}
+
+.title {
+  width: 22rem;
+  height: 2.75rem;
+}
+
+.description {
+  width: 100%;
+  max-width: 38rem;
+  height: 4.5rem;
+}
+
+.image {
+  aspect-ratio: 4 / 3;
+}
+
+.name {
+  width: 55%;
+  height: 1.25rem;
+}
+
+.subtitle {
+  width: 70%;
+  height: 1rem;
+}
+
+.text {
+  width: 100%;
+  height: 1rem;
+}
+
+.textShort {
+  width: 80%;
+  height: 1rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cta {
+  width: 100%;
+  height: 11rem;
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 64rem) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 48rem) {
+  .section {
+    gap: var(--space-10);
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .title {
+    width: 100%;
+    max-width: 18rem;
+  }
+  .description {
+    max-width: 100%;
+  }
+  .cta {
+    height: 9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image::before,
+  .name::before,
+  .subtitle::before,
+  .text::before,
+  .textShort::before,
+  .eyebrow::before,
+  .title::before,
+  .description::before,
+  .cta::before {
+    animation: none;
+  }
+}
