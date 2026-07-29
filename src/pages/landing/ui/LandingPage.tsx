@@ -3,22 +3,12 @@ import { Seo } from '@/shared/lib'
 import { Company } from '@/widgets/company'
 import { Hero } from '@/widgets/hero'
 import { Services } from '@/widgets/services'
-import { LandingSection } from '@/widgets/landing-section'
 import { WhyChooseUs } from '@/widgets/why-choose-us'
 import { Gallery } from '@/widgets/gallery'
 import { Reviews } from '@/widgets/reviews'
-import styles from './landing-page.module.css'
+import { Contacts } from '@/widgets/contacts'
 
-const landingSections = [
-  {
-    id: 'contacts',
-    title: 'Contacts Placeholder',
-    description:
-      'Контактный блок будет интегрирован позже. Сейчас сохранена только точка в структуре страницы и якорная навигация.',
-    tone: 'background',
-    variant: 'default',
-  },
-] as const
+import styles from './landing-page.module.css'
 
 export function LandingPage() {
   return (
@@ -30,6 +20,7 @@ export function LandingPage() {
       />
 
       <div className={styles.page}>
+
         <Hero />
 
         <Company />
@@ -42,16 +33,8 @@ export function LandingPage() {
 
         <Reviews />
 
-        {landingSections.map((section) => (
-          <LandingSection
-            description={section.description}
-            id={section.id}
-            key={section.id}
-            title={section.title}
-            tone={section.tone}
-            variant={section.variant}
-          />
-        ))}
+        <Contacts />
+
       </div>
     </>
   )

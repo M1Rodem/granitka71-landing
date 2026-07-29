@@ -1,0 +1,139 @@
+/* БЫЛО .card -> СТАЛО .panel для внешней обертки */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 36rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+/* Стили для самой карточки локации */
+.location {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: var(--space-6);
+
+  /* Добавили прозрачную границу слева */
+  border-left: 3px solid transparent;
+
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-card);
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.location:hover {
+  transform: translateY(-4px);
+  border-left-color: var(--color-accent); /* Акцент при наведении */
+  box-shadow: var(--shadow-card-hover);
+}
+
+.locationHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: auto;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: var(--color-accent);
+  border: 1px solid rgb(176 141 87 / 0.18);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgb(176 141 87 / 0.12), rgb(176 141 87 / 0.05));
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.location:hover .icon {
+  transform: scale(1.04);
+  border-color: rgb(176 141 87 / 0.3);
+  background: linear-gradient(180deg, rgb(176 141 87 / 0.18), rgb(176 141 87 / 0.08));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.content h4 {
+  margin: 0;
+}
+
+.address {
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.footer {
+  display: flex;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer > * {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding: var(--space-6);
+  }
+
+  .location {
+    padding: var(--space-5);
+  }
+
+  .locationHeader {
+    gap: var(--space-3);
+  }
+
+  .icon {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .location,
+  .icon {
+    transition: none;
+  }
+
+  .location:hover {
+    transform: none;
+  }
+
+  .location:hover .icon {
+    transform: none;
+  }
+}

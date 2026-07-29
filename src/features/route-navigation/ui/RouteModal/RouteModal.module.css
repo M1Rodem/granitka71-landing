@@ -1,0 +1,196 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  background: rgb(27 27 27 / 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-5);
+}
+
+.modal {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+
+  width: min(100%, 28rem);
+
+  padding: var(--space-8);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+
+  background: var(--color-surface-glass);
+
+  backdrop-filter: blur(24px);
+
+  box-shadow: var(--shadow-modal);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  margin: 0;
+
+  color: var(--color-text-primary);
+
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  line-height: 1.6;
+}
+
+.providers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.info {
+  padding: var(--space-4);
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.92rem;
+  line-height: 1.6;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  background: rgb(176 141 87 / 0.05);
+}
+
+.close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0;
+
+  color: var(--color-text-secondary);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-round);
+
+  background: var(--color-surface);
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.close:hover {
+  color: var(--color-text-primary);
+
+  border-color: rgb(176 141 87 / 0.25);
+
+  background: rgb(176 141 87 / 0.08);
+
+  transform: rotate(90deg);
+}
+
+.close:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.cancel {
+  width: 100%;
+
+  padding: 0.95rem 1rem;
+
+  color: var(--color-text-secondary);
+
+  font-weight: 600;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cancel:hover {
+  color: var(--color-text-primary);
+
+  border-color: rgb(176 141 87 / 0.25);
+
+  background: rgb(176 141 87 / 0.06);
+}
+
+.cancel:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    align-items: flex-end;
+
+    padding: var(--space-3);
+  }
+
+  .modal {
+    width: 100%;
+
+    padding: var(--space-6);
+
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .close,
+  .cancel {
+    transition: none;
+  }
+
+  .close:hover {
+    transform: none;
+  }
+}
