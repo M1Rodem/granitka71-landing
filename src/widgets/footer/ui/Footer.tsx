@@ -1,114 +1,83 @@
-import { APP_NAME } from '@/shared/constants'
+import { motion } from 'framer-motion'
+
+import { useFooter } from '@/shared/hooks'
+import { staggerVariants } from '@/shared/motion'
 import { Container, Section, Text } from '@/shared/ui'
-import { landingNavigationItems } from '@/shared/config/navigation'
+
+import { FooterAddresses } from './FooterAddresses'
+import { FooterBottom } from './FooterBottom'
+import { FooterCompany } from './FooterCompany'
+import { FooterContacts } from './FooterContacts'
+import { FooterNavigation } from './FooterNavigation'
 
 import styles from './footer.module.css'
 
-const footerContacts = [
-  {
-    label: 'Телефон',
-    value: '+7 (4872) 30-00-00',
-    href: 'tel:+74872300000',
-  },
-  {
-    label: 'Почта',
-    value: 'hello@granitka71.ru',
-    href: 'mailto:hello@granitka71.ru',
-  },
-]
-
-const footerSocials = [
-  {
-    label: 'VK',
-    href: 'https://vk.com/',
-  },
-  {
-    label: 'Telegram',
-    href: 'https://t.me/',
-  },
-]
-
 export function Footer() {
-  return (
-    <footer>
-      <Section className={styles.section} tone="primary">
+  const { data, isLoading, error } = useFooter()
+
+  if (isLoading) {
+    return (
+      <Section as="footer" id="footer" tone="footer">
         <Container>
-          <div className={styles.grid}>
-            <div className={styles.brand}>
-              <Text
-                as="a"
-                className={styles.logo}
-                href="/"
-                size="lg"
-                tone="inverse"
-                weight="semibold"
-              >
-                {APP_NAME}
-              </Text>
-              <Text tone="inverse">
-                Каркас landing page подготовлен к наполнению бизнес-виджетами и
-                дальнейшей интеграции с CRM API.
-              </Text>
+          <div className={styles.footer}>
+            <div className={styles.grid}>
+              <div className={styles.column}>
+                <div className={styles.skeleton} style={{ height: '2rem', width: '8rem' }} />
+                <div className={styles.skeleton} style={{ height: '4rem', width: '100%' }} />
+              </div>
+              <div className={styles.column}>
+                <div className={styles.skeleton} style={{ height: '1.5rem', width: '6rem' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '80%' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '70%' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '90%' }} />
+              </div>
+              <div className={styles.column}>
+                <div className={styles.skeleton} style={{ height: '1.5rem', width: '6rem' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '60%' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '70%' }} />
+              </div>
+              <div className={styles.column}>
+                <div className={styles.skeleton} style={{ height: '1.5rem', width: '6rem' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '80%' }} />
+                <div className={styles.skeleton} style={{ height: '1rem', width: '90%' }} />
+              </div>
             </div>
-
-            <div className={styles.column}>
-              <Text as="span" size="sm" tone="accent" weight="semibold">
-                Навигация
-              </Text>
-              <ul className={styles.list}>
-                {landingNavigationItems.map((item) => (
-                  <li key={item.id}>
-                    <a className={styles.link} href={item.href}>
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.column}>
-              <Text as="span" size="sm" tone="accent" weight="semibold">
-                Контакты
-              </Text>
-              <ul className={styles.list}>
-                {footerContacts.map((item) => (
-                  <li key={item.label}>
-                    <a className={styles.link} href={item.href}>
-                      {item.value}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.column}>
-              <Text as="span" size="sm" tone="accent" weight="semibold">
-                Соцсети
-              </Text>
-              <ul className={styles.list}>
-                {footerSocials.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      className={styles.link}
-                      href={item.href}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className={styles.bottom}>
-            <Text size="sm" tone="inverse">
-              © 2026 {APP_NAME}. Foundation и landing shell готовы к развитию.
-            </Text>
           </div>
         </Container>
       </Section>
-    </footer>
+    )
+  }
+
+  if (error || !data) {
+    return (
+      <Section as="footer" id="footer" tone="footer">
+        <Container>
+          <Text tone="muted">Не удалось загрузить информацию.</Text>
+        </Container>
+      </Section>
+    )
+  }
+
+  return (
+    <Section as="footer" id="footer" tone="footer">
+      <Container>
+        <motion.div
+          className={styles.footer}
+          variants={staggerVariants}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          <div className={styles.grid}>
+            <FooterCompany company={data.company} />
+            <FooterNavigation items={data.navigation} />
+            <FooterContacts contacts={data.contacts} socials={data.socials} />
+            <FooterAddresses addresses={data.addresses} legal={data.legal} />
+          </div>
+
+          <FooterBottom companyName={data.company.name} legal={data.legal} />
+        </motion.div>
+      </Container>
+    </Section>
   )
 }

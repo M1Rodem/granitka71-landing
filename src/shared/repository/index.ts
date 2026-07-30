@@ -5,6 +5,7 @@ import type { WhyChooseUsRepository } from './interfaces/why-choose-us.repositor
 import type { GalleryRepository } from './interfaces/gallery.repository'
 import type { ReviewRepository } from './interfaces/review.repository'
 import type { ContactRepository } from './interfaces/contact.repository'
+import type { FooterRepository } from './interfaces/footer.repository'
 
 import { MockHeroRepository } from './mock/hero.mock.repository'
 import { MockServiceRepository } from './mock/service.mock.repository'
@@ -13,6 +14,7 @@ import { MockWhyChooseUsRepository } from './mock/why-choose-us.mock.repository'
 import { MockGalleryRepository } from './mock/gallery.mock.repository'
 import { MockReviewRepository } from './mock/review.mock.repository'
 import { MockContactRepository } from './mock/contact.mock.repository'
+import { MockFooterRepository } from './mock/footer.mock.repository'
 
 export type { HeroRepository } from './interfaces/hero.repository'
 export type { ServiceRepository } from './interfaces/service.repository'
@@ -21,6 +23,7 @@ export type { WhyChooseUsRepository } from './interfaces/why-choose-us.repositor
 export type { GalleryRepository } from './interfaces/gallery.repository'
 export type { ReviewRepository } from './interfaces/review.repository'
 export type { ContactRepository } from './interfaces/contact.repository'
+export type { FooterRepository } from './interfaces/footer.repository'
 
 export const heroRepository: HeroRepository = new MockHeroRepository()
 export const serviceRepository: ServiceRepository = new MockServiceRepository()
@@ -29,3 +32,4 @@ export const whyChooseUsRepository: WhyChooseUsRepository = new MockWhyChooseUsR
 export const galleryRepository: GalleryRepository = new MockGalleryRepository()
 export const reviewRepository: ReviewRepository = new MockReviewRepository()
 export const contactRepository: ContactRepository = new MockContactRepository()
+export const footerRepository: FooterRepository = new MockFooterRepository()

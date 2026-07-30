@@ -4,7 +4,7 @@ import type { PolymorphicProps } from '@/shared/types'
 
 import styles from './Section.module.css'
 
-type SectionTone = 'transparent' | 'background' | 'surface' | 'primary'
+type SectionTone = 'transparent' | 'background' | 'surface' | 'primary' | 'footer'
 type SectionOwnProps = {
   children: ReactNode
   tone?: SectionTone

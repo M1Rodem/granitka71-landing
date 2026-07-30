@@ -1,0 +1,30 @@
+.companyLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.companyLogo img {
+  display: block;
+  flex-shrink: 0;
+}
+
+.companyName {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: #f0f0f0;
+  letter-spacing: -0.02em;
+}
+
+.companyDescription {
+  max-width: 20rem;
+  line-height: 1.7;
+  color: #b0b0b0;
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .companyDescription {
+    max-width: 100%;
+  }
+}

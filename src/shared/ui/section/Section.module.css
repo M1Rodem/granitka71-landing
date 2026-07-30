@@ -20,3 +20,9 @@
   --section-background-color: var(--color-primary);
   color: var(--color-surface);
 }
+
+.tone-footer {
+  --section-background-color: #2a2a2a;
+  padding-block: 0;
+  color: #d4d4d4;
+}

@@ -5,10 +5,11 @@ import {
   ArrowUpRight,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
-  Send,
 } from 'lucide-react'
+
+
+import { MaxIcon, TelegramIcon } from '@/shared/icons'
 
 import { fadeInVariants } from '@/shared/motion'
 import { ButtonLink, Surface, Text } from '@/shared/ui'
@@ -22,8 +23,8 @@ interface ContactCardProps {
 const icons = {
   phone: Phone,
   email: Mail,
-  telegram: Send,
-  max: MessageCircle,
+  telegram: TelegramIcon,
+  max: MaxIcon,
   website: ArrowUpRight,
   address: MapPin,
 }

@@ -109,7 +109,10 @@ export function Header() {
 
   const handleItemClick = useCallback(
     (id: string) => {
-      scrollTo(id)
+      setIsMenuOpen(false)
+      setTimeout(() => {
+        scrollTo(id)
+      }, 150)
     },
     [scrollTo],
   )

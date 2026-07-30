@@ -1,0 +1,19 @@
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-6);
+  border-top: 1px solid rgb(255 255 255 / 0.06);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.copyright {
+  font-size: var(--text-xs);
+  color: #888;
+}
+
+.copyright strong {
+  color: #c8c8c8;
+  font-weight: var(--font-weight-medium);
+}

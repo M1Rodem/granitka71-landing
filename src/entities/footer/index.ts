@@ -1,0 +1,7 @@
+export * from './model/footer.types'
+export * from './model/footer-address.types'
+export * from './model/footer-company.types'
+export * from './model/footer-contacts.types'
+export * from './model/footer-legal.types'
+export * from './model/footer-navigation.types'
+export * from './model/footer-social.types'

@@ -1,0 +1,54 @@
+.addressList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addressItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.addressTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: #e8e8e8;
+}
+
+.addressText {
+  font-size: var(--text-sm);
+  color: #b0b0b0;
+  line-height: 1.5;
+}
+
+/* ---- Legal ---- */
+
+.legal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.legalText {
+  font-size: var(--text-xs);
+  color: #888;
+  line-height: 1.6;
+}
+
+.legalName {
+  font-weight: var(--font-weight-medium);
+  color: #c8c8c8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .addressLink {
+    transition: none !important;
+  }
+}
