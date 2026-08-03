@@ -8,6 +8,7 @@ export type ContactType =
   | 'phone'
   | 'email'
   | 'telegram'
+  | 'whatsapp'
   | 'max'
   | 'website'
   | 'address'
@@ -17,7 +18,7 @@ export interface ContactItem {
   type: ContactType
 
   title: string
-  value: string
+  value?: string
 
   href: string
 

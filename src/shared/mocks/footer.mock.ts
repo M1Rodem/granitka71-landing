@@ -15,22 +15,28 @@ export const footerMock: FooterData = {
     { id: 'contacts', label: 'Контакты', href: '#contacts' },
   ],
   contacts: {
-    phone: '+7 (960) 616-03-00',
+    phone: '+7 903 659-02-22',
     phoneLabel: 'Позвонить',
-    email: 'info@granitka71.ru',
+    email: 'granitka71@gmail.com',
     emailLabel: 'Написать',
   },
   socials: [
     {
+      id: 'whatsapp',
+      label: 'WhatsApp',
+      href: 'https://wa.me/79036590222',
+      icon: 'whatsapp',
+    },
+    {
       id: 'telegram',
       label: 'Telegram',
-      href: 'https://t.me/granitka71',
+      href: 'https://t.me/+79036590222',
       icon: 'telegram',
     },
     {
       id: 'max',
       label: 'MAX',
-      href: 'https://max.ru/...',
+      href: 'https://max.ru/u/f9LHodD0cOI8E2SkCudYIsL30W2F4gFuDMdY5FCgWG5s9XAHyMp4LuiB2NQ',
       icon: 'max',
     },
     {

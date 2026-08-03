@@ -11,56 +11,40 @@ export const contactsMock: ContactData = {
   contacts: [
     {
       id: 'phone',
-
       type: 'phone',
-
       title: 'Телефон',
-
-      value: '+7 (960) 616-03-00',
-
-      href: 'tel:+79606160300',
-
+      value: '+7 903 659-02-22',
+      href: 'tel:+79036590222',
       buttonLabel: 'Позвонить',
     },
-
+    {
+      id: 'whatsapp',
+      type: 'whatsapp',
+      title: 'WhatsApp',
+      href: 'https://wa.me/79036590222',
+      buttonLabel: 'Написать в WhatsApp',
+    },
     {
       id: 'email',
-
       type: 'email',
-
       title: 'Email',
-
-      value: 'info@granitka71.ru',
-
-      href: 'mailto:info@granitka71.ru',
-
+      value: 'granitka71@gmail.com',
+      href: 'mailto:granitka71@gmail.com',
       buttonLabel: 'Написать',
     },
-
     {
       id: 'telegram',
-
       type: 'telegram',
-
       title: 'Telegram',
-
-      value: '@granitka71',
-
-      href: 'https://t.me/granitka71',
-
-      buttonLabel: 'Открыть Telegram',
+      href: 'https://t.me/+79036590222',
+      buttonLabel: 'Написать в Telegram',
     },
     {
-        id: 'max',
-        type: 'max',
-
-        title: 'MAX',
-
-        value: '@granitka71',
-
-        href: 'https://max.ru/...',
-
-        buttonLabel: 'Открыть MAX',
+      id: 'max',
+      type: 'max',
+      title: 'MAX',
+      href: 'https://max.ru/u/f9LHodD0cOI8E2SkCudYIsL30W2F4gFuDMdY5FCgWG5s9XAHyMp4LuiB2NQ',
+      buttonLabel: 'Открыть MAX',
     },
   ],
 

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-import { MaxIcon, TelegramIcon, VkIcon } from '@/shared/icons'
+import { MaxIcon, TelegramIcon, VkIcon, WhatsAppIcon } from '@/shared/icons'
 
 import type { FooterSocial } from '@/entities/footer'
 
@@ -16,6 +16,7 @@ const socialIcons = {
   telegram: TelegramIcon,
   vk: VkIcon,
   max: MaxIcon,
+  whatsapp: WhatsAppIcon,
 }
 
 export function FooterSocials({ socials }: FooterSocialsProps) {

@@ -8,8 +8,7 @@ import {
   Phone,
 } from 'lucide-react'
 
-
-import { MaxIcon, TelegramIcon } from '@/shared/icons'
+import { MaxIcon, TelegramIcon, WhatsAppIcon } from '@/shared/icons'
 
 import { fadeInVariants } from '@/shared/motion'
 import { ButtonLink, Surface, Text } from '@/shared/ui'
@@ -23,6 +22,7 @@ interface ContactCardProps {
 const icons = {
   phone: Phone,
   email: Mail,
+  whatsapp: WhatsAppIcon,
   telegram: TelegramIcon,
   max: MaxIcon,
   website: ArrowUpRight,
@@ -34,8 +34,12 @@ export function ContactCard({ contact }: ContactCardProps) {
 
   const isExternal =
     contact.type === 'telegram' ||
+    contact.type === 'whatsapp' ||
     contact.type === 'max' ||
     contact.type === 'website'
+
+  // Проверяем, есть ли значение
+  const hasValue = contact.value && contact.value.trim().length > 0
 
   return (
     <motion.div variants={fadeInVariants}>
@@ -56,9 +60,12 @@ export function ContactCard({ contact }: ContactCardProps) {
           </Text>
         </div>
 
-        <Text className={styles.value}>
-          {contact.value}
-        </Text>
+        {/* Показываем value только если оно есть */}
+        {hasValue && (
+          <Text className={styles.value}>
+            {contact.value}
+          </Text>
+        )}
 
         <ButtonLink
           href={contact.href}

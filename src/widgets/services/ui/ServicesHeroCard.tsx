@@ -16,7 +16,7 @@ interface ServicesHeroCardProps {
 export function ServicesHeroCard({
   service,
 }: ServicesHeroCardProps) {
-  const landscapingImage = getImage('Landscaping')
+  const landscapingImage = getImage('landscaping')
 
   return (
     <motion.div variants={slideUpVariants}>

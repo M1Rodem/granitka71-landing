@@ -5,7 +5,7 @@ import { Button, Dialog, Heading, Surface, Text } from '@/shared/ui'
 
 import styles from './review-form-modal.module.css'
 
-const EMAIL = 'info@granitka71.ru'
+const EMAIL = 'granitka71@gmail.com'
 
 export function ReviewFormModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [copied, setCopied] = useState(false)

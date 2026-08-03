@@ -43,4 +43,4 @@ export const landingNavigationItems: NavigationItem[] = [
 ]
 
 export const headerCtaLabel = 'Позвонить'
-export const headerPhoneHref = 'tel:+79000000000'
+export const headerPhoneHref = 'tel:+79036590222'

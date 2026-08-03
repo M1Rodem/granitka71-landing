@@ -22,7 +22,7 @@ interface ServicesHorizontalCardProps {
 export function ServicesHorizontalCard({
   service,
 }: ServicesHorizontalCardProps) {
-  const monumentImage = getImage('Monument')
+  const monumentImage = getImage('monument')
 
   return (
     <motion.div variants={slideUpVariants}>

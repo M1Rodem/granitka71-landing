@@ -1,18 +1,52 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  /* Использовал переменную вместо хардкода для идеальной консистентности */
+.gridWrapper {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-6);
 }
 
+/* Первая строка - 3 колонки */
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* Вторая строка - 2 колонки, растянутые на всю ширину */
+.rowTwo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  /* Убираем max-width и центрирование - теперь на всю ширину */
+  width: 100%;
+}
+
+/* Адаптивность */
 @media (max-width: 1024px) {
-  .grid {
+  .row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rowTwo {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 640px) {
-  .grid {
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rowTwo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .rowTwo {
     grid-template-columns: 1fr;
   }
 }
