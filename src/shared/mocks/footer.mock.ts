@@ -42,7 +42,7 @@ export const footerMock: FooterData = {
     {
       id: 'vk',
       label: 'VK',
-      href: '#',
+      href: 'https://vk.ru/granitka71.kireevsk',
       icon: 'vk',
     },
   ],
