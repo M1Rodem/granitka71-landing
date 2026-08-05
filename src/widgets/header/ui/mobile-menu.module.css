@@ -26,7 +26,6 @@
 
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
 
   width: 100%;
   overflow: hidden;
@@ -236,4 +235,53 @@
   .mobileCta {
     animation: none !important;
   }
+}
+
+.mobileCtaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  width: 100%;
+}
+
+.mobileCta {
+  width: 100%;
+  justify-content: center;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 10px 22px rgb(15 23 42 / 0.12);
+  border-radius: var(--radius-lg);
+}
+
+/* ╨Ф╨╗╤П ╨╗╤Г╤З╤И╨╡╨╣ ╤З╨╕╤В╨░╨╡╨╝╨╛╤Б╤В╨╕ — ╨╝╨╡╨╜╤М╤И╨╡ ╤В╨╡╨║╤Б╤В╨░ */
+.mobileCta span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.mobileCta .phoneNumber {
+  font-weight: var(--font-weight-regular);
+  opacity: 0.9;
+  font-size: var(--text-xs);
+}
+
+.mobileCta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
 }

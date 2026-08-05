@@ -13,15 +13,19 @@ export type ContactType =
   | 'website'
   | 'address'
 
+export interface PhoneItem {
+  value: string
+  href: string
+  label?: string
+}
+
 export interface ContactItem {
   id: string
   type: ContactType
-
   title: string
   value?: string
-
+  phones?: PhoneItem[]
   href: string
-
   buttonLabel: string
 }
 

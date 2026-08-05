@@ -16,15 +16,36 @@ interface FooterContactsProps {
 }
 
 export function FooterContacts({ contacts, socials }: FooterContactsProps) {
+  const hasPhones = contacts.phones && contacts.phones.length > 0
+
   return (
     <motion.div className={styles.column} variants={slideUpVariants}>
       <h3 className={styles.columnTitle}>Контакты</h3>
 
       <div className={contactsStyles.contactItem}>
         <span className={contactsStyles.contactLabel}>Телефон</span>
-        <a href={`tel:${contacts.phone.replace(/\s/g, '')}`} className={contactsStyles.contactLink}>
-          {contacts.phone}
-        </a>
+
+        {/* Если есть несколько телефонов — показываем список */}
+        {hasPhones ? (
+          <div className={contactsStyles.phonesList}>
+            {contacts.phones?.map((phone, index) => (
+              <a
+                key={index}
+                href={phone.href}
+                className={contactsStyles.phoneLink}
+              >
+                {phone.value}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <a
+            href={`tel:${contacts.phone.replace(/\s/g, '')}`}
+            className={contactsStyles.contactLink}
+          >
+            {contacts.phone}
+          </a>
+        )}
       </div>
 
       <div className={contactsStyles.contactItem}>

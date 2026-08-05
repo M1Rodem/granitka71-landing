@@ -6,7 +6,7 @@ import { Container, Surface } from '@/shared/ui'
 import { createClassName } from '@/shared/utils'
 import { useActiveSection } from '@/shared/hooks/useActiveSection'
 import { useSmoothScroll } from '@/shared/hooks/useSmoothScroll'
-import { landingNavigationItems, headerCtaLabel, headerPhoneHref } from '@/shared/config/navigation'
+import { landingNavigationItems, headerCtaLabel, headerPhoneHref, headerPhones } from '@/shared/config/navigation'
 
 import {
   useBodyScrollLock,
@@ -183,6 +183,7 @@ export function Header() {
                   items={landingNavigationItems}
                   currentHash={currentHash}
                   ctaLabel={headerCtaLabel}
+                  phones={headerPhones}
                   onCtaClick={handleCall}
                   onNavigate={handleNavigate}
                   onNavHover={handleNavHover}
@@ -208,6 +209,7 @@ export function Header() {
               items={landingNavigationItems}
               currentHash={currentHash}
               ctaLabel={headerCtaLabel}
+              phones={headerPhones}
               onCtaClick={handleCall}
               onNavigate={handleNavigate}
               onClose={handleCloseMenu}
