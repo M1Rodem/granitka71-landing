@@ -1,0 +1,110 @@
+.triggerWrapper {
+  display: inline-block;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+  z-index: 10;
+}
+
+.trigger svg:last-child {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.chevronClosed {
+  transform: rotate(0deg);
+}
+
+.dropdown {
+  position: fixed;
+  min-width: 240px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.menu {
+  pointer-events: auto;
+
+  /* Glass-эффект, как у хедера */
+  padding: var(--space-2);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xl);
+
+  /* Глубокая премиальная тень */
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.15),
+    0 8px 20px -8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+
+  border-radius: var(--radius-lg);
+
+  /* Плавный сдвиг при наведении */
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+
+.item:hover {
+  background: rgb(176 141 87 / 0.1);
+  color: var(--color-accent);
+  transform: translateX(4px); /* Легкий сдвиг вправо */
+}
+
+.itemIcon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.item:hover .itemIcon {
+  opacity: 1;
+}
+
+.item:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-accent);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Убираем анимации для accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .trigger svg:last-child {
+    transition: none !important;
+  }
+
+  .item {
+    transition: none !important;
+  }
+
+  .item:hover {
+    transform: none !important;
+  }
+}

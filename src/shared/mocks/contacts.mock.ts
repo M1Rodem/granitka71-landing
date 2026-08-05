@@ -13,9 +13,14 @@ export const contactsMock: ContactData = {
       id: 'phone',
       type: 'phone',
       title: 'Телефон',
-      value: '+7 903 659-02-22',
+      value: '+7 903 659-02-22, +7 950 904-66-77, +7 960 603-25-75',
       href: 'tel:+79036590222',
       buttonLabel: 'Позвонить',
+      phones: [
+        { value: '+7 903 659-02-22', href: 'tel:+79036590222' },
+        { value: '+7 950 904-66-77', href: 'tel:+79509046677' },
+        { value: '+7 960 603-25-75', href: 'tel:+79606032575' },
+      ],
     },
     {
       id: 'whatsapp',

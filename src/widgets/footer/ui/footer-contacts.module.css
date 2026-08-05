@@ -27,6 +27,31 @@
   outline-offset: var(--focus-ring-offset);
 }
 
+/* ---- Список телефонов в Footer ---- */
+
+.phonesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.phoneLink {
+  color: #e8e8e8;
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+.phoneLink:hover {
+  color: var(--color-accent);
+}
+
+.phoneLink:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-accent);
+  outline-offset: var(--focus-ring-offset);
+}
+
 /* ---- Socials ---- */
 
 .socials {
@@ -73,6 +98,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .contactLink,
+  .phoneLink,
   .socialLink {
     transition: none !important;
   }

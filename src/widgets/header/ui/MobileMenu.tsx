@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { forwardRef } from 'react'
+import { Phone } from 'lucide-react'
 
 import type { NavigationItem } from '@/shared/config/navigation'
 import { Button, Container, Surface } from '@/shared/ui'
@@ -11,6 +12,7 @@ interface MobileMenuProps {
   items: NavigationItem[]
   currentHash: string
   ctaLabel: string
+  phones: { label: string; href: string }[]
   onCtaClick: () => void
   onNavigate: () => void
   onClose: () => void
@@ -24,7 +26,7 @@ export const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
       items,
       currentHash,
       ctaLabel,
-      onCtaClick,
+      phones,
       onNavigate,
       headerHeight,
       onItemClick,
@@ -60,14 +62,21 @@ export const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
               onItemClick={onItemClick}
             />
 
-            <Button
-              variant="primary"
-              onClick={onCtaClick}
-              className={styles.mobileCta}
-              size="lg"
-            >
-              {ctaLabel}
-            </Button>
+            <div className={styles.mobileCtaWrapper}>
+              {phones.map((phone) => (
+                <Button
+                  key={phone.href}
+                  variant="primary"
+                  onClick={() => { window.location.href = phone.href }}
+                  className={styles.mobileCta}
+                  size="lg"
+                >
+                  <Phone size={16} />
+                  {ctaLabel}
+                  <span className={styles.phoneNumber}>{phone.label}</span>
+                </Button>
+              ))}
+            </div>
           </Surface>
         </Container>
       </motion.div>

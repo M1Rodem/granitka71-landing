@@ -17,6 +17,11 @@ export const footerMock: FooterData = {
   contacts: {
     phone: '+7 903 659-02-22',
     phoneLabel: 'Позвонить',
+    phones: [
+      { value: '+7 903 659-02-22', href: 'tel:+79036590222' },
+      { value: '+7 950 904-66-77', href: 'tel:+79509046677' },
+      { value: '+7 960 603-25-75', href: 'tel:+79606032575' },
+    ],
     email: 'granitka71@gmail.com',
     emailLabel: 'Написать',
   },

@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 import type { NavigationItem } from '@/shared/config/navigation'
-import { Button } from '@/shared/ui'
 import { Navigation } from '@/widgets/navigation'
+
+import { PhoneDropdown } from './PhoneDropdown'
 
 import styles from './header.module.css'
 
@@ -11,6 +11,7 @@ interface HeaderDesktopProps {
   items: NavigationItem[]
   currentHash: string
   ctaLabel: string
+  phones: { label: string; href: string }[]
   onCtaClick: () => void
   onNavigate: () => void
   onNavHover: (id: string | null) => void
@@ -24,7 +25,7 @@ export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
       items,
       currentHash,
       ctaLabel,
-      onCtaClick,
+      phones,
       onNavigate,
       onNavHover,
       hoveredNavId,
@@ -32,6 +33,8 @@ export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
     },
     ref,
   ) {
+    const [isPhoneOpen, setIsPhoneOpen] = useState(false)
+
     return (
       <div ref={ref} className={styles.desktop}>
         <div className={styles.desktopNavigation}>
@@ -46,25 +49,13 @@ export const HeaderDesktop = forwardRef<HTMLDivElement, HeaderDesktopProps>(
         </div>
 
         <div className={styles.desktopActions}>
-          <motion.div
-            whileHover={{
-              scale: 1.05,
-              transition: { type: 'spring', stiffness: 400, damping: 20 },
-            }}
-            whileTap={{
-              scale: 0.95,
-              transition: { duration: 0.1 },
-            }}
-          >
-            <Button
-              onClick={onCtaClick}
-              size="sm"
-              variant="primary"
-              className={styles.ctaButton}
-            >
-              {ctaLabel}
-            </Button>
-          </motion.div>
+          <PhoneDropdown
+            phones={phones}
+            ctaLabel={ctaLabel}
+            isOpen={isPhoneOpen}
+            onToggle={() => setIsPhoneOpen(!isPhoneOpen)}
+            onClose={() => setIsPhoneOpen(false)}
+          />
         </div>
       </div>
     )

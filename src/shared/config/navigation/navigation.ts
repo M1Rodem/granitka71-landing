@@ -43,4 +43,11 @@ export const landingNavigationItems: NavigationItem[] = [
 ]
 
 export const headerCtaLabel = 'Позвонить'
-export const headerPhoneHref = 'tel:+79036590222'
+
+export const headerPhones = [
+  { label: '+7 903 659-02-22', href: 'tel:+79036590222' },
+  { label: '+7 950 904-66-77', href: 'tel:+79509046677' },
+  { label: '+7 960 603-25-75', href: 'tel:+79606032575' },
+]
+
+export const headerPhoneHref = headerPhones[0].href
