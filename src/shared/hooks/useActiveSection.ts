@@ -33,11 +33,6 @@ export function useActiveSection({ sectionIds }: UseActiveSectionOptions) {
       if (closest) {
         const id = closest.id
         setActiveSection(id)
-
-        const hash = `#${id}`
-        if (window.location.hash !== hash) {
-          history.replaceState(null, '', hash)
-        }
       }
     }
 

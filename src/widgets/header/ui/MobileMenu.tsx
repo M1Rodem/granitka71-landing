@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 import { Phone } from 'lucide-react'
 
 import type { NavigationItem } from '@/shared/config/navigation'
-import { Button, Container, Surface } from '@/shared/ui'
+import { Container, Surface } from '@/shared/ui'
 import { Navigation } from '@/widgets/navigation'
 
 import styles from './mobile-menu.module.css'
@@ -25,7 +25,6 @@ export const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
     {
       items,
       currentHash,
-      ctaLabel,
       phones,
       onNavigate,
       headerHeight,
@@ -52,30 +51,31 @@ export const MobileMenu = forwardRef<HTMLDivElement, MobileMenuProps>(
             padding="lg"
             tone="glass"
           >
-            <Navigation
-              ariaLabel="Мобильная навигация"
-              className={styles.mobileNavigation}
-              currentHref={currentHash}
-              items={items}
-              orientation="vertical"
-              onNavigate={onNavigate}
-              onItemClick={onItemClick}
-            />
+            {/* ОБЕРТКА ДЛЯ ВСЕГО КОНТЕНТА С ОДИНАКОВЫМИ ПАДДИНГАМИ */}
+            <div className={styles.mobileContent}>
+              <Navigation
+                ariaLabel="Мобильная навигация"
+                className={styles.mobileNavigation}
+                currentHref={currentHash}
+                items={items}
+                orientation="vertical"
+                onNavigate={onNavigate}
+                onItemClick={onItemClick}
+              />
 
-            <div className={styles.mobileCtaWrapper}>
-              {phones.map((phone) => (
-                <Button
-                  key={phone.href}
-                  variant="primary"
-                  onClick={() => { window.location.href = phone.href }}
-                  className={styles.mobileCta}
-                  size="lg"
-                >
-                  <Phone size={16} />
-                  {ctaLabel}
-                  <span className={styles.phoneNumber}>{phone.label}</span>
-                </Button>
-              ))}
+              <div className={styles.mobileCtaWrapper}>
+                <span className={styles.mobileCtaLabel}>Позвонить:</span>
+                {phones.map((phone) => (
+                  <a
+                    key={phone.href}
+                    href={phone.href}
+                    className={styles.phoneMenuItem}
+                  >
+                    <Phone size={14} className={styles.phoneMenuItemIcon} />
+                    {phone.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </Surface>
         </Container>
