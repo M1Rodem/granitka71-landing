@@ -10,11 +10,11 @@ import {
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
-import { MaxIcon, TelegramIcon, WhatsAppIcon } from '@/shared/icons'
+import { Icon } from '@/shared/icons' // 👈 Только Icon
 
 import { fadeInVariants } from '@/shared/motion'
 import { ButtonLink, Surface, Text } from '@/shared/ui'
-import { useNavigate } from '@/shared/hooks'  // 👈 Импортируем хук
+import { useNavigate } from '@/shared/hooks'
 
 import styles from './contact-card.module.css'
 
@@ -22,21 +22,18 @@ interface ContactCardProps {
   contact: ContactItem
 }
 
-const icons = {
+// Lucide иконки
+const lucideIcons = {
   phone: Phone,
   email: Mail,
-  whatsapp: WhatsAppIcon,
-  telegram: TelegramIcon,
-  max: MaxIcon,
   website: ArrowUpRight,
   address: MapPin,
 }
 
 export function ContactCard({ contact }: ContactCardProps) {
-  const Icon = icons[contact.type]
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()  // 👈 Используем хук
+  const navigate = useNavigate()
 
   const isExternal =
     contact.type === 'telegram' ||
@@ -51,11 +48,10 @@ export function ContactCard({ contact }: ContactCardProps) {
   const phoneList = contact.phones || []
 
   const handlePhoneClick = (href: string) => {
-    navigate(href)  // 👈 Используем хук вместо прямого обращения
+    navigate(href) 
     setIsDropdownOpen(false)
   }
 
-  // Закрытие дропдауна при клике вне его области
   useEffect(() => {
     if (!isDropdownOpen) return
 
@@ -69,12 +65,19 @@ export function ContactCard({ contact }: ContactCardProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isDropdownOpen])
 
+  // Проверяем, есть ли иконка в lucideIcons
+  const LucideIcon = lucideIcons[contact.type as keyof typeof lucideIcons]
+
   return (
     <motion.div variants={fadeInVariants}>
       <Surface className={styles.card}>
         <div className={styles.header}>
           <div className={styles.iconWrapper}>
-            <Icon size={24} className={styles.icon} />
+            {LucideIcon ? (
+              <LucideIcon size={24} className={styles.icon} />
+            ) : (
+              <Icon name={contact.type as 'whatsapp' | 'telegram' | 'max' | 'vk'} size={36} className={styles.icon} />
+            )}
           </div>
           <Text weight="semibold" className={styles.title}>
             {contact.title}
